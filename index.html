@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- استدعاء مسبق سريع لليافطة في ذاكرة المتصفح -->
+  <link rel="preload" as="image" href="banner.webp" type="image/webp" fetchpriority="high">
+  
   <!-- استدعاء الخطوط -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;600;700;800&family=El+Messiri:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -17,7 +20,6 @@
       background-attachment: fixed;
     }
 
-    /* حصر مقياس التكبير في نص الحديث فقط */
     #resultsContainer {
       --font-scale: 1;
     }
@@ -30,7 +32,6 @@
       contain: layout style paint;
     }
 
-    /* تكبير خط الحديث فقط بحساب منفصل ومركزي */
     .hadith-font { 
       font-family: 'Noto Naskh Arabic', serif; 
       font-weight: 600;
@@ -40,7 +41,6 @@
       font-size: calc(1.22rem * var(--font-scale, 1));
     }
 
-    /* تثبيت أحجام العناوين والأرقام دون أن تتأثر بالمنزلق */
     .hadith-book-tag { font-size: 0.85rem !important; }
     .hadith-num-tag { font-size: 0.85rem !important; }
     .badge-center-counter { font-size: 0.95rem !important; }
@@ -50,34 +50,20 @@
       letter-spacing: 1px;
       text-shadow: 0 0 25px rgba(56, 189, 248, 0.7), 0 4px 8px rgba(0,0,0,0.95);
     }
-    
-    /* تصميم اليافطة العلوية: طراز إسلامي ملكي بنقوش التوريق وقوس المحراب */
-    .islamic-banner {
-      background-color: #0b0217;
-      background-image: 
-        radial-gradient(ellipse at 50% 20%, rgba(254, 240, 138, 0.28) 0%, rgba(217, 119, 6, 0.12) 60%, transparent 80%),
-        linear-gradient(135deg, rgba(26, 6, 50, 0.96), rgba(10, 2, 22, 0.98)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='40' cy='40' r='24' stroke='%23f59e0b' stroke-width='1' stroke-opacity='0.25'/%3E%3Cpath d='M40 8 C40 8 46 22 56 26 C66 30 74 40 74 40 C74 40 66 50 56 54 C46 58 40 72 40 72 C40 72 34 58 24 54 C14 50 6 40 6 40 C6 40 14 30 24 26 C34 22 40 8 40 8 Z' stroke='%23ffd700' stroke-width='1.2' stroke-opacity='0.35'/%3E%3Ccircle cx='40' cy='40' r='10' stroke='%23fef08a' stroke-width='0.8' stroke-opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
-      border: 2px solid #FCD34D;
+
+    .banner-frame-wrapper {
+      background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
       box-shadow: 
         0 20px 50px -10px rgba(0, 0, 0, 0.95), 
-        0 0 35px 5px rgba(251, 191, 36, 0.38),
-        inset 0 0 40px rgba(245, 158, 11, 0.15);
+        0 0 40px 6px rgba(251, 191, 36, 0.45);
     }
 
-    /* إطار داخلي مزخرف للمحراب */
-    .mihrab-inner-frame {
-      border: 1.5px dashed rgba(253, 224, 71, 0.5);
-    }
-
-    /* مستطيل شريط التحكم في الخط */
     .font-control-box {
       background: linear-gradient(135deg, rgba(28, 8, 52, 0.95), rgba(12, 3, 26, 0.98));
       border: 1.8px solid #f59e0b;
       box-shadow: 0 8px 25px -4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(245, 158, 11, 0.22);
     }
 
-    /* شريط التمرير المنزلق المثلث مع الكرة المجسمة 3D */
     .font-range-input {
       -webkit-appearance: none;
       appearance: none;
@@ -123,7 +109,6 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='12' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.2'/%3E%3C/svg%3E");
     }
 
-    /* الأنماط الخمسة لخلفيات الأحاديث */
     .card-theme-purple {
       background: linear-gradient(135deg, rgba(28, 8, 52, 0.92), rgba(16, 4, 32, 0.95));
       border: 1.5px solid rgba(168, 85, 247, 0.45);
@@ -157,65 +142,26 @@
 </head>
 <body class="text-purple-100 min-h-screen relative">
 
-  <!-- اليافطة العلوية: تصميم محراب إسلامي أندلسي فخم ومهيب -->
-  <div class="pt-6 pb-2 px-4">
-    <div class="max-w-3xl mx-auto islamic-banner relative rounded-[2.5rem] p-4 sm:p-6 backdrop-blur-md overflow-hidden">
-      
-      <!-- إطار داخلي بهيئة المحراب مع زخارف توريق إسلامية -->
-      <div class="mihrab-inner-frame rounded-[2rem] px-5 sm:px-10 py-7 text-center relative">
-        
-        <!-- تاج القوس الإسلامي العلوي في منتصف المحراب -->
-        <div class="flex items-center justify-center gap-3 mb-2">
-          <span class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-l from-amber-300 to-transparent"></span>
-          <span class="text-amber-300 text-lg select-none">۞</span>
-          <span class="text-xs sm:text-sm font-black text-amber-200 tracking-widest px-2">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</span>
-          <span class="text-amber-300 text-lg select-none">۞</span>
-          <span class="h-[1.5px] w-12 sm:w-20 bg-gradient-to-r from-amber-300 to-transparent"></span>
-        </div>
-
-        <!-- زخارف توريق نباتية مذهبة نقية في الزوايا -->
-        <svg class="absolute top-3 right-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
-          <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
-          <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
-        </svg>
-        <svg class="absolute top-3 left-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-x-[-1]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
-          <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
-          <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
-        </svg>
-        <svg class="absolute bottom-3 right-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-y-[-1]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
-          <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
-          <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
-        </svg>
-        <svg class="absolute bottom-3 left-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-[-1]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
-          <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
-          <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
-        </svg>
-
-        <!-- اسم الشيخ بتوهج سماوي فخم ونجمتي ربع الحزب -->
-        <div class="flex items-center justify-center gap-3 sm:gap-6 mt-3">
-          <span class="text-amber-300 text-2xl sm:text-4xl font-serif drop-shadow-[0_0_12px_rgba(254,240,138,1)] select-none">۞</span>
-          <h2 class="title-font text-3xl sm:text-4xl md:text-5xl font-black text-sky-300 drop-shadow-[0_4px_16px_rgba(56,189,248,0.7)]">
-            الشيخ / كرم عثمان
-          </h2>
-          <span class="text-amber-300 text-2xl sm:text-4xl font-serif drop-shadow-[0_0_12px_rgba(254,240,138,1)] select-none">۞</span>
-        </div>
-
-        <!-- السطر التعريفي في خرطوشة إسلامية مذهبة ومضيئة -->
-        <div class="mt-5">
-          <span class="inline-block text-sm sm:text-base md:text-lg text-sky-100 font-black tracking-widest bg-gradient-to-r from-[#170530] via-[#26094d] to-[#170530] px-8 sm:px-10 py-2.5 rounded-full border-2 border-amber-400/70 shadow-[0_0_25px_rgba(245,158,11,0.35)]">
-            محرك بحث أحاديث الصحيحين
-          </span>
-        </div>
-
+  <!-- اليافطة العلوية مع دعم WebP فائق الخفة والسرعة -->
+  <div class="pt-6 pb-2 px-3 sm:px-6">
+    <div class="max-w-4xl mx-auto rounded-3xl sm:rounded-[2rem] p-1 sm:p-1.5 banner-frame-wrapper">
+      <div class="relative overflow-hidden rounded-[1.4rem] sm:rounded-[1.8rem] bg-[#07020d]">
+        <picture>
+          <source srcset="banner.webp" type="image/webp">
+          <img src="banner.png" 
+               alt="الشيخ كرم عثمان - محرك بحث أحاديث الصحيحين" 
+               fetchpriority="high"
+               loading="eager"
+               decoding="async"
+               width="1200" 
+               height="450"
+               class="w-full h-auto object-cover block shadow-2xl transition-transform duration-300 hover:scale-[1.01]">
+        </picture>
       </div>
     </div>
   </div>
 
-  <!-- مستطيل التحكم في حجم الخط بالشكل المثلث المنزلق فائق السرعة -->
+  <!-- مستطيل التحكم في حجم الخط -->
   <div class="max-w-xl mx-auto px-4 mt-3">
     <div class="font-control-box p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3.5 backdrop-blur-md">
       <div class="flex items-center gap-2.5 flex-shrink-0">
@@ -228,7 +174,7 @@
         </span>
       </div>
 
-      <!-- الشريط المثلثي المنزلق البديع السريع -->
+      <!-- الشريط المثلثي المنزلق -->
       <div class="relative w-full max-w-xs flex items-center h-8">
         <svg class="absolute inset-0 w-full h-5 pointer-events-none my-auto" viewBox="0 0 200 20" preserveAspectRatio="none">
           <defs>
@@ -256,40 +202,59 @@
       
       <!-- كتاب 3D مجسم وموسوعة الصحيحين في المنتصف -->
       <div class="flex items-center justify-center gap-3.5 sm:gap-5">
-        <svg class="w-12 h-12 sm:w-16 sm:h-16 drop-shadow-[0_6px_16px_rgba(251,191,36,0.75)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-14 h-14 sm:w-16 sm:h-16 drop-shadow-[0_8px_20px_rgba(251,191,36,0.65)]" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="coverLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#059669"/>
+            <linearGradient id="leatherCoverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#047857"/>
+              <stop offset="50%" stop-color="#064e3b"/>
               <stop offset="100%" stop-color="#022c22"/>
             </linearGradient>
-            <linearGradient id="coverRight" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#10b981"/>
-              <stop offset="100%" stop-color="#047857"/>
+            <linearGradient id="gildedEdgesGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="35%" stop-color="#f59e0b"/>
+              <stop offset="70%" stop-color="#d97706"/>
+              <stop offset="100%" stop-color="#78350f"/>
             </linearGradient>
-            <linearGradient id="pagesGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient id="pageLeftGrad" x1="100%" y1="50%" x2="0%" y2="50%">
+              <stop offset="0%" stop-color="#ebd8b7"/>
+              <stop offset="20%" stop-color="#fffdfa"/>
+              <stop offset="85%" stop-color="#fdf8ed"/>
+              <stop offset="100%" stop-color="#e5d1ae"/>
+            </linearGradient>
+            <linearGradient id="pageRightGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stop-color="#ebd8b7"/>
+              <stop offset="20%" stop-color="#fffdfa"/>
+              <stop offset="85%" stop-color="#fdf8ed"/>
+              <stop offset="100%" stop-color="#e5d1ae"/>
+            </linearGradient>
+            <linearGradient id="rubyRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ef4444"/>
+              <stop offset="50%" stop-color="#b91c1c"/>
+              <stop offset="100%" stop-color="#7f1d1d"/>
+            </linearGradient>
+            <linearGradient id="pureGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#fef08a"/>
               <stop offset="50%" stop-color="#f59e0b"/>
-              <stop offset="100%" stop-color="#b45309"/>
-            </linearGradient>
-            <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#fbbf24"/>
-              <stop offset="50%" stop-color="#fef08a"/>
               <stop offset="100%" stop-color="#d97706"/>
             </linearGradient>
           </defs>
 
-          <ellipse cx="50" cy="88" rx="35" ry="6" fill="#000000" opacity="0.65"/>
-          <path d="M15 72 L50 82 L85 72 L85 77 L50 87 L15 77 Z" fill="url(#pagesGrad)"/>
-          <path d="M15 32 C25 28 42 33 50 38 L50 78 C42 73 25 68 15 72 Z" fill="#fffbeb" stroke="#fef08a" stroke-width="1.5"/>
-          <path d="M85 32 C75 28 58 33 50 38 L50 78 C58 73 75 68 85 72 Z" fill="#fffbeb" stroke="#fef08a" stroke-width="1.5"/>
-          <path d="M12 26 C22 22 40 27 50 33 L50 78 C40 72 22 67 12 71 Z" fill="url(#coverLeft)" stroke="#fde047" stroke-width="2"/>
-          <path d="M88 26 C78 22 60 27 50 33 L50 78 C60 72 78 67 88 71 Z" fill="url(#coverRight)" stroke="#fde047" stroke-width="2"/>
-          <path d="M50 33 L50 78" stroke="#022c22" stroke-width="3"/>
-          <path d="M48 33 L52 33 L53 50 L47 50 Z" fill="url(#goldRibbon)"/>
-          <circle cx="28" cy="48" r="7" fill="none" stroke="#fde047" stroke-width="1.2" opacity="0.85"/>
-          <path d="M28 43 L28 53 M23 48 L33 48" stroke="#fde047" stroke-width="1" opacity="0.85"/>
-          <circle cx="72" cy="48" r="7" fill="none" stroke="#fde047" stroke-width="1.2" opacity="0.85"/>
-          <path d="M72 43 L72 53 M67 48 L77 48" stroke="#fde047" stroke-width="1" opacity="0.85"/>
+          <ellipse cx="60" cy="100" rx="46" ry="8" fill="#000000" opacity="0.65"/>
+          <path d="M12 76 C28 72 48 76 60 82 C72 76 92 72 108 76 L108 82 C92 78 72 82 60 88 C48 82 28 78 12 82 Z" fill="url(#leatherCoverGrad)" stroke="#fde047" stroke-width="1.2"/>
+          <path d="M15 71 C30 67 48 71 60 77 L60 84 C48 78 30 74 15 78 Z" fill="url(#gildedEdgesGrad)"/>
+          <path d="M105 71 C90 67 72 71 60 77 L60 84 C72 78 90 74 105 78 Z" fill="url(#gildedEdgesGrad)"/>
+          <path d="M15 73.5 C30 69.5 48 73.5 60 79.5 M15 76 C30 72 48 76 60 82" stroke="#78350f" stroke-width="0.6" opacity="0.7"/>
+          <path d="M105 73.5 C90 69.5 72 73.5 60 79.5 M105 76 C90 72 72 76 60 82" stroke="#78350f" stroke-width="0.6" opacity="0.7"/>
+          <path d="M60 36 C46 25 28 26 15 31 C14 45 14 58 15 71 C28 66 46 65 60 77 Z" fill="url(#pageLeftGrad)" stroke="#fef08a" stroke-width="1.2"/>
+          <path d="M60 36 C74 25 92 26 105 31 C106 45 106 58 105 71 C92 66 74 65 60 77 Z" fill="url(#pageRightGrad)" stroke="#fef08a" stroke-width="1.2"/>
+          <path d="M59 36 L59 77 L61 77 L61 36 Z" fill="#b45309" opacity="0.65"/>
+          <path d="M60 36 L60 77" stroke="#451a03" stroke-width="1.8"/>
+          <path d="M56 40 C44 32 30 33 20 37 C19 46 19 55 20 64 C30 60 44 60 56 69 Z" fill="none" stroke="#d97706" stroke-width="0.8" stroke-dasharray="3 1.5" opacity="0.65"/>
+          <path d="M64 40 C76 32 90 33 100 37 C101 46 101 55 100 64 C90 60 76 60 64 69 Z" fill="none" stroke="#d97706" stroke-width="0.8" stroke-dasharray="3 1.5" opacity="0.65"/>
+          <circle cx="26" cy="42" r="2.5" fill="url(#pureGoldGrad)"/>
+          <circle cx="94" cy="42" r="2.5" fill="url(#pureGoldGrad)"/>
+          <path d="M60 35 C62 48 68 62 72 82 C74 89 76 95 73 103 L67 98 L61 104 C64 96 63 89 61 82 C59 70 58 48 60 35 Z" fill="url(#rubyRibbonGrad)" stroke="#fde047" stroke-width="0.8"/>
+          <polygon points="73,103 67,98 61,104 63,101 67,96 71,100" fill="url(#pureGoldGrad)"/>
         </svg>
 
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-amber-300 tracking-wide drop-shadow-[0_2px_14px_rgba(251,191,36,0.6)]">
@@ -362,7 +327,7 @@
                class="w-full bg-[#062c1d] border-2 border-emerald-600/70 rounded-2xl pr-16 pl-6 py-5 sm:py-6 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 text-white placeholder-emerald-200/60 shadow-2xl transition">
       </form>
 
-      <!-- سطر مستقل لجملة نتائج البحث والإجمالي بخط كبير وواضح ومميز -->
+      <!-- سطر مستقل لجملة نتائج البحث والإجمالي -->
       <div class="mt-4 flex items-center justify-center">
         <div class="inline-flex items-center gap-3 bg-[#062c1d] border-2 border-emerald-400/80 px-8 py-3 rounded-2xl shadow-[0_4px_20px_rgba(5,150,105,0.35)]">
           <span class="text-amber-300 text-base sm:text-lg">۞</span>
@@ -416,7 +381,7 @@
       "card-theme-green"
     ];
 
-    // برمجة سريعة للشريط المثلثي
+    // شريط تكبير الخط المثلثي
     const fontSizeSlider = document.getElementById("fontSizeSlider");
     const fontSizeDisplay = document.getElementById("fontSizeDisplay");
     const resultsContainer = document.getElementById("resultsContainer");
@@ -613,7 +578,7 @@
               </span>
             </div>
 
-            <!-- نص الحديث فقط هو الذي يتأثر بمقياس التكبير -->
+            <!-- نص الحديث فقط هو الذي يتأثر بالتكبير -->
             <p class="hadith-font text-purple-50 tracking-wide">${h.text}</p>
 
             <div class="mt-5 pt-3.5 border-t border-white/10 flex justify-center sm:justify-end">
