@@ -7,21 +7,32 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Tajawal', sans-serif; }
+    body { 
+      font-family: 'Tajawal', sans-serif; 
+      background-color: #0a0314;
+      /* خلفية بنقوش إسلامية هندسية مدمجة بنعومة مع تدرج إضاءة */
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.12'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.15'/%3E%3Cpath d='M30 11L34.5 24.5L49 30L34.5 35.5L30 49L25.5 35.5L11 30L25.5 24.5Z' fill='none' stroke='%23d97706' stroke-width='0.7' stroke-opacity='0.12'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+    }
     .hadith-font { font-family: 'Amiri', serif; }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
+<body class="text-purple-100 min-h-screen">
 
-  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50 py-4 px-6">
+  <header class="border-b border-purple-900/60 bg-[#120524]/85 backdrop-blur sticky top-0 z-50 py-4 px-6 shadow-md shadow-purple-950/40">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-bold text-amber-400">موسوعة الصحيحين</h1>
-        <p class="text-xs text-slate-400 mt-0.5">البحث الفوري في صحيح الإمام البخاري وصحيح الإمام مسلم</p>
+        <h1 class="text-2xl font-bold text-amber-400 flex items-center gap-2">
+          <span>✨</span>
+          <span>موسوعة الصحيحين</span>
+        </h1>
+        <p class="text-xs text-purple-300 mt-0.5">البحث الفوري في أحاديث صحيح الإمام البخاري وصحيح الإمام مسلم</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <select id="bookFilter" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-400">
+        <select id="bookFilter" class="bg-[#1c0a38] border border-purple-800/80 rounded-xl px-4 py-2 text-sm text-purple-200 focus:outline-none focus:border-amber-400 transition">
           <option value="all">كلا الصحيحين</option>
           <option value="bukhari">صحيح البخاري فقط</option>
           <option value="muslim">صحيح مسلم فقط</option>
@@ -31,24 +42,28 @@
   </header>
 
   <main class="max-w-5xl mx-auto px-6 py-8">
+    <!-- صندوق البحث -->
     <div class="relative mb-6">
       <input type="text" id="searchInput" 
-             placeholder="ابحث عن كلمة، راوٍ، أو جزء من حديث (مثال: إنما الأعمال بالنيات)..." 
-             class="w-full bg-slate-800/90 border border-slate-700 rounded-xl px-5 py-4 text-base focus:outline-none focus:ring-2 focus:ring-amber-400 text-slate-100 placeholder-slate-500 shadow-lg">
-      <span id="resultCount" class="absolute left-4 top-4 text-xs bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-full">جاهز للبحث</span>
+             placeholder="ابحث عن كلمة، راوٍ، أو مسألة فقهية (مثال: إنما الأعمال بالنيات)..." 
+             class="w-full bg-[#180830]/90 border border-purple-700/50 rounded-2xl px-5 py-4 text-base focus:outline-none focus:ring-2 focus:ring-amber-400 text-purple-100 placeholder-purple-400 shadow-xl transition">
+      <span id="resultCount" class="absolute left-4 top-4 text-xs bg-[#290e4f] text-amber-300 border border-purple-700/50 px-3 py-1.5 rounded-full font-medium shadow-inner">جاهز للبحث</span>
     </div>
 
-    <div id="loader" class="text-center py-16">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-amber-400 border-t-transparent mb-3"></div>
-      <p class="text-slate-400 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
+    <!-- مؤشر التحميل -->
+    <div id="loader" class="text-center py-20">
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-400 border-t-transparent mb-3"></div>
+      <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
+    <!-- قائمة النتائج -->
     <div id="resultsContainer" class="space-y-4"></div>
 
+    <!-- أزرار الصفحات -->
     <div id="pagination" class="flex justify-center items-center gap-3 mt-8 hidden">
-      <button id="prevBtn" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm border border-slate-700">السابق</button>
-      <span id="pageInfo" class="text-sm text-slate-400"></span>
-      <button id="nextBtn" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm border border-slate-700">التالي</button>
+      <button id="prevBtn" class="bg-[#1e0a3a] hover:bg-[#2b0f54] text-purple-200 px-5 py-2 rounded-xl text-sm border border-purple-700/60 transition shadow">السابق</button>
+      <span id="pageInfo" class="text-sm text-purple-300 font-medium"></span>
+      <button id="nextBtn" class="bg-[#1e0a3a] hover:bg-[#2b0f54] text-purple-200 px-5 py-2 rounded-xl text-sm border border-purple-700/60 transition shadow">التالي</button>
     </div>
   </main>
 
@@ -58,6 +73,7 @@
     let currentPage = 1;
     const itemsPerPage = 15;
 
+    // تطبيع النصوص العربية وإزالة التشكيل
     function normalizeArabic(text) {
       if (!text) return "";
       return text
@@ -68,6 +84,7 @@
         .trim();
     }
 
+    // جلب ملفات البيانات
     async function loadHadithData() {
       try {
         const [bukhariRes, muslimRes] = await Promise.all([
@@ -100,10 +117,11 @@
         filteredHadiths = allHadiths;
         renderResults();
       } catch (err) {
-        document.getElementById("loader").innerHTML = `<p class="text-red-400">تعذر تحميل ملفات الأحاديث من مجلد data.</p>`;
+        document.getElementById("loader").innerHTML = `<p class="text-rose-400">تعذر تحميل ملفات الأحاديث من مجلد data.</p>`;
       }
     }
 
+    // فلترة البحث
     function applyFilter() {
       const query = normalizeArabic(document.getElementById("searchInput").value);
       const selectedBook = document.getElementById("bookFilter").value;
@@ -119,13 +137,14 @@
       renderResults();
     }
 
+    // عرض الكروت
     function renderResults() {
       const container = document.getElementById("resultsContainer");
       const pagination = document.getElementById("pagination");
       container.innerHTML = "";
 
       if (filteredHadiths.length === 0) {
-        container.innerHTML = `<div class="text-center py-12 text-slate-500">لا توجد نتائج مطابقة لبحثك.</div>`;
+        container.innerHTML = `<div class="text-center py-16 text-purple-400">لا توجد نتائج مطابقة لما بحثت عنه.</div>`;
         pagination.classList.add("hidden");
         return;
       }
@@ -135,13 +154,15 @@
 
       paginatedItems.forEach(h => {
         const card = document.createElement("div");
-        card.className = "p-5 bg-slate-800/60 border border-slate-700/60 rounded-xl hover:border-slate-600 transition";
+        card.className = "p-6 bg-[#16072b]/75 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-amber-500/50 transition-all duration-200 shadow-lg";
         card.innerHTML = `
-          <div class="flex items-center justify-between mb-3 border-b border-slate-700/50 pb-2">
-            <span class="text-xs font-bold px-2 py-1 rounded ${h.id === 'bukhari' ? 'bg-amber-500/20 text-amber-300' : 'bg-emerald-500/20 text-emerald-300'}">${h.book}</span>
-            <span class="text-xs text-slate-400">رقم الحديث: ${h.number}</span>
+          <div class="flex items-center justify-between mb-3 border-b border-purple-800/50 pb-2.5">
+            <span class="text-xs font-bold px-3 py-1 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'}">
+              ${h.book}
+            </span>
+            <span class="text-xs text-purple-400 font-mono">رقم الحديث: ${h.number}</span>
           </div>
-          <p class="hadith-font text-xl leading-relaxed text-slate-200">${h.text}</p>
+          <p class="hadith-font text-xl leading-loose text-purple-50 tracking-wide">${h.text}</p>
         `;
         container.appendChild(card);
       });
