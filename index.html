@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- استدعاء خط نوتو نسخ الواضح جداً في التشكيل بجانب خطوط الرقعة والمسيري -->
+  <!-- استدعاء خط نوتو نسخ للأحاديث وخطوط العناوين التراثية -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;600;700;800&family=El+Messiri:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --font-scale: 1; /* مقياس تكبير الخط الافتراضي */
+    }
+
     body { 
       font-family: 'Tajawal', sans-serif; 
       background-color: #080210;
@@ -17,12 +21,25 @@
       background-attachment: fixed;
     }
 
-    /* خط الأحاديث بنوتو نسخ ليكون التشكيل فائق الوضوح ومريحاً للعين */
+    /* خط الحديث المشكول يتجاوب مع مقياس التكبير */
     .hadith-font { 
       font-family: 'Noto Naskh Arabic', serif; 
       font-weight: 600;
       line-height: 2.3;
       letter-spacing: 0.3px;
+      font-size: calc(1.22rem * var(--font-scale, 1));
+    }
+
+    .hadith-book-tag {
+      font-size: calc(0.85rem * var(--font-scale, 1));
+    }
+
+    .hadith-num-tag {
+      font-size: calc(0.85rem * var(--font-scale, 1));
+    }
+
+    .badge-center-counter {
+      font-size: calc(0.95rem * var(--font-scale, 1));
     }
 
     .title-font { 
@@ -45,11 +62,47 @@
         0 0 15px 2px rgba(255, 255, 255, 0.35),
         inset 0 0 35px rgba(251, 191, 36, 0.25);
     }
-    
-    .badge-counter {
-      background: radial-gradient(circle at 30% 30%, #064e3b, #022013);
-      border: 1.5px solid #10b981;
-      box-shadow: 0 4px 15px rgba(2, 44, 25, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+
+    /* مستطيل شريط التحكم في الخط المجسم */
+    .font-control-box {
+      background: linear-gradient(135deg, rgba(30, 8, 56, 0.96), rgba(12, 3, 26, 0.98));
+      border: 1.8px solid #f59e0b;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 158, 11, 0.25), inset 0 1px 2px rgba(255,255,255,0.25);
+    }
+
+    /* الكرة ثلاثية الأبعاد على الشريط المنزلق */
+    .font-range-input {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      height: 28px;
+    }
+    .font-range-input:focus {
+      outline: none;
+    }
+    .font-range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 8%, #fde047 30%, #d97706 75%, #78350f 100%);
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.95), 0 0 14px rgba(251,191,36,0.95);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .font-range-input::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    .font-range-input::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 8%, #fde047 30%, #d97706 75%, #78350f 100%);
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.95), 0 0 14px rgba(251,191,36,0.95);
+      cursor: pointer;
     }
 
     .hadith-card {
@@ -69,7 +122,7 @@
 </head>
 <body class="text-purple-100 min-h-screen relative">
 
-  <!-- اليافطة العلوية الفخمة -->
+  <!-- اليافطة العلوية -->
   <div class="pt-6 pb-2 px-4">
     <div class="max-w-3xl mx-auto islamic-banner relative rounded-3xl px-6 sm:px-10 py-8 text-center backdrop-blur-md overflow-hidden">
       <!-- زخارف الأركان الذهبية -->
@@ -96,20 +149,88 @@
     </div>
   </div>
 
-  <!-- شريط العنوان والفلترة -->
-  <header class="border-b border-purple-900/60 bg-[#120524]/85 backdrop-blur sticky top-0 z-40 py-3.5 px-6 shadow-md shadow-purple-950/40 mt-3">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>
-        <h1 class="text-xl font-bold text-amber-300 flex items-center gap-2">
-          <span>📖</span>
-          <span>موسوعة الصحيحين</span>
-        </h1>
-        <p class="text-xs text-purple-300 mt-0.5">البحث الفوري في أحاديث صحيح الإمام البخاري وصحيح الإمام مسلم</p>
+  <!-- مستطيل مجسم للتحكم في حجم الخط أسفل اليافطة -->
+  <div class="max-w-xl mx-auto px-4 mt-3">
+    <div class="font-control-box p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3.5 backdrop-blur-md">
+      <!-- تسمية حجم الخط مع أيقونة -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="text-amber-300 text-xl drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]">🗚</span>
+        <span class="font-black text-amber-200 text-sm sm:text-base tracking-wide drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]">
+          حجم الخط
+        </span>
       </div>
 
+      <!-- شريط التمرير المثلثي والكرة الذهبية المجسمة -->
+      <div class="relative w-full max-w-xs flex items-center">
+        <!-- رسم الشريط المنزلق على شكل مثلث متسع من اليسار إلى اليمين -->
+        <svg class="absolute inset-0 w-full h-5 pointer-events-none my-auto" viewBox="0 0 200 20" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="wedgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#059669" stop-opacity="0.6"/>
+              <stop offset="50%" stop-color="#10b981" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.95"/>
+            </linearGradient>
+          </defs>
+          <polygon points="4,10 196,2 196,18 4,10" fill="url(#wedgeGrad)" stroke="#fcd34d" stroke-width="1.3"/>
+        </svg>
+        <input type="range" id="fontSizeSlider" min="1" max="1.6" step="0.02" value="1" dir="ltr" class="font-range-input relative z-10 w-full cursor-pointer">
+      </div>
+
+      <!-- مؤشر النسبة المئوية للتكبير -->
+      <span id="fontSizeDisplay" class="text-xs sm:text-sm font-black text-amber-300 font-mono px-3 py-1 rounded-xl bg-purple-950/80 border border-amber-400/40 shadow-inner">
+        100%
+      </span>
+    </div>
+  </div>
+
+  <!-- شريط العنوان والفلترة: توسيط موسوعة الصحيحين وأيقونة الكتاب 3D في منتصف الصفحة تماماً -->
+  <header class="border-b border-purple-900/60 bg-[#120524]/90 backdrop-blur sticky top-0 z-40 py-4 px-6 shadow-md shadow-purple-950/40 mt-4">
+    <div class="max-w-5xl mx-auto flex flex-col items-center justify-center text-center gap-3">
+      
+      <!-- أيقونة الكتاب ثلاثية الأبعاد الملونة وعنوان موسوعة الصحيحين في المنتصف -->
+      <div class="flex items-center justify-center gap-3 sm:gap-4">
+        <!-- كتاب 3D مجسم فاخر بتجليد زمردي وصفحات ذهبية -->
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-[0_4px_14px_rgba(251,191,36,0.65)]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bookCoverLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#047857" />
+              <stop offset="100%" stop-color="#022c22" />
+            </linearGradient>
+            <linearGradient id="bookCoverRight" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#059669" />
+              <stop offset="100%" stop-color="#064e3b" />
+            </linearGradient>
+            <linearGradient id="goldPage" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a" />
+              <stop offset="50%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#b45309" />
+            </linearGradient>
+          </defs>
+          <path d="M32 54 L32 18" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M6 46 C16 43 28 47 32 52 C32 46 20 40 6 42 Z" fill="url(#goldPage)" opacity="0.9"/>
+          <path d="M58 46 C48 43 36 47 32 52 C32 46 44 40 58 42 Z" fill="url(#goldPage)" opacity="0.9"/>
+          <path d="M6 16 C18 12 28 16 32 20 L32 50 C28 46 18 42 6 46 Z" fill="url(#bookCoverLeft)" stroke="#fcd34d" stroke-width="1.6"/>
+          <path d="M58 16 C46 12 36 16 32 20 L32 50 C36 46 46 42 58 46 Z" fill="url(#bookCoverRight)" stroke="#fcd34d" stroke-width="1.6"/>
+          <circle cx="19" cy="30" r="5" fill="none" stroke="#fef08a" stroke-width="1.2" opacity="0.85"/>
+          <path d="M19 23 L19 37 M12 30 L26 30" stroke="#fef08a" stroke-width="1" opacity="0.7"/>
+          <circle cx="45" cy="30" r="5" fill="none" stroke="#fef08a" stroke-width="1.2" opacity="0.85"/>
+          <path d="M45 23 L45 37 M38 30 L52 30" stroke="#fef08a" stroke-width="1" opacity="0.7"/>
+          <path d="M32 18 L32 40 L35 36 L38 40 L38 20" fill="#f59e0b" stroke="#fde047" stroke-width="0.8"/>
+        </svg>
+
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-amber-300 tracking-wide drop-shadow-[0_2px_14px_rgba(251,191,36,0.6)]">
+          موسوعة الصحيحين
+        </h1>
+      </div>
+
+      <!-- سطر البحث الفوري أسمك وأوضح وبارز في المنتصف -->
+      <p class="text-sm sm:text-base md:text-lg font-black text-purple-200 tracking-wide drop-shadow-md">
+        البحث الفوري في أحاديث صحيح الإمام البخاري وصحيح الإمام مسلم
+      </p>
+
       <!-- قائمة الاختيار المنسدلة كالستارة -->
-      <div class="relative z-50" id="customDropdownWrapper">
-        <button type="button" id="dropdownBtn" class="flex items-center justify-between gap-3 bg-gradient-to-r from-[#1c0a38] via-[#2a0e54] to-[#1c0a38] border-2 border-amber-400/70 hover:border-amber-300 px-5 py-2.5 rounded-2xl shadow-[0_4px_18px_rgba(245,158,11,0.25)] transition-all active:scale-95 cursor-pointer">
+      <div class="relative z-50 mt-1" id="customDropdownWrapper">
+        <button type="button" id="dropdownBtn" class="flex items-center justify-between gap-3 bg-gradient-to-r from-[#1c0a38] via-[#2a0e54] to-[#1c0a38] border-2 border-amber-400/70 hover:border-amber-300 px-5 py-2 rounded-2xl shadow-[0_4px_18px_rgba(245,158,11,0.25)] transition-all active:scale-95 cursor-pointer">
           <span class="text-amber-400 text-xs">❖</span>
           <span id="selectedOptionText" class="font-black text-amber-200 text-sm sm:text-base tracking-wide drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
             كلا الصحيحين
@@ -119,8 +240,7 @@
           </svg>
         </button>
 
-        <!-- ستارة الخيارات المنسدلة لأسفل -->
-        <div id="dropdownMenu" class="hidden opacity-0 -translate-y-3 transition-all duration-300 ease-out origin-top absolute left-0 sm:right-auto mt-2 w-60 rounded-2xl dropdown-curtain border-2 border-amber-400/80 shadow-[0_15px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(245,158,11,0.35)] overflow-hidden backdrop-blur-xl z-50">
+        <div id="dropdownMenu" class="hidden opacity-0 -translate-y-3 transition-all duration-300 ease-out origin-top absolute left-1/2 -translate-x-1/2 mt-2 w-60 rounded-2xl dropdown-curtain border-2 border-amber-400/80 shadow-[0_15px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(245,158,11,0.35)] overflow-hidden backdrop-blur-xl z-50">
           <div class="bg-gradient-to-r from-transparent via-amber-300 to-transparent h-[3px]"></div>
           
           <div class="p-2 space-y-1.5">
@@ -187,8 +307,8 @@
       <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
-    <!-- قائمة النتائج -->
-    <div id="resultsContainer" class="space-y-5"></div>
+    <!-- قائمة النتائج مع الترقيم في أعلى المستطيل في المنتصف -->
+    <div id="resultsContainer" class="space-y-6"></div>
 
     <!-- مؤشر التحميل الدائري اللانهائي -->
     <div id="infiniteLoader" class="text-center py-8 hidden">
@@ -214,6 +334,18 @@
     const batchSize = 15;
     let isLoadingMore = false;
     let selectedBookFilter = "all";
+
+    // التحكم في حجم الخط عبر الشريط المنزلق
+    const fontSizeSlider = document.getElementById("fontSizeSlider");
+    const fontSizeDisplay = document.getElementById("fontSizeDisplay");
+
+    fontSizeSlider.addEventListener("input", (e) => {
+      const scale = parseFloat(e.target.value);
+      document.documentElement.style.setProperty("--font-scale", scale);
+      if (fontSizeDisplay) {
+        fontSizeDisplay.innerText = `${Math.round(scale * 100)}%`;
+      }
+    });
 
     // تنظيف الرموز التالفة
     function cleanCorruptedChars(text) {
@@ -376,33 +508,34 @@
         nextItems.forEach((h, idx) => {
           const serialNum = displayedCount + idx + 1;
 
-          const row = document.createElement("div");
-          row.className = "flex items-center gap-3 sm:gap-4 group";
+          const card = document.createElement("div");
+          card.className = "hadith-card relative w-full p-6 sm:p-7 bg-[#16072b]/80 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-xl cursor-pointer group";
 
-          row.innerHTML = `
-            <!-- الترقيم الخارجي على اليمين -->
-            <div class="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 badge-counter rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105">
-              <span class="text-amber-300 font-black text-base sm:text-xl font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
-                ${serialNum}
+          card.innerHTML = `
+            <!-- الشريط العلوي للبطاقة: اسم الكتاب، رقم المستطيل في المنتصف، ورقم الحديث على اليسار -->
+            <div class="flex items-center justify-between mb-4 border-b border-purple-800/50 pb-3 gap-2">
+              <!-- اسم الكتاب على اليمين -->
+              <span class="hadith-book-tag font-black px-3.5 py-1.5 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">
+                ${h.book}
+              </span>
+              
+              <!-- رقم المستطيل التسلسلي في أعلى المستطيل في النص -->
+              <div class="badge-center-counter px-4 py-1 rounded-xl flex items-center justify-center gap-1.5 bg-gradient-to-b from-[#064e3b] to-[#022013] border-2 border-emerald-400 shadow-[0_3px_12px_rgba(2,44,25,0.85)]">
+                <span class="text-emerald-300 text-xs font-bold">#</span>
+                <span class="text-amber-300 font-black font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
+                  ${serialNum}
+                </span>
+              </div>
+
+              <!-- رقم الحديث على اليسار -->
+              <span class="hadith-num-tag font-black text-amber-300 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-xl shadow-sm tracking-wide">
+                رقم الحديث: <span class="text-white font-black">${h.number}</span>
               </span>
             </div>
 
-            <!-- بطاقة الحديث بخط نوتو نسخ فائق الوضوح في التشكيل -->
-            <div class="hadith-card relative flex-grow p-6 sm:p-7 bg-[#16072b]/80 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-xl cursor-pointer">
-              <div class="flex items-center justify-between mb-4 border-b border-purple-800/50 pb-3">
-                <span class="text-xs sm:text-sm font-black px-3.5 py-1.5 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">
-                  ${h.book}
-                </span>
-                
-                <span class="text-xs sm:text-sm font-black text-amber-300 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1 rounded-xl shadow-sm tracking-wide">
-                  رقم الحديث: <span class="text-white font-black text-sm sm:text-base">${h.number}</span>
-                </span>
-              </div>
-              <p class="hadith-font text-lg sm:text-xl text-purple-50 tracking-wide">${h.text}</p>
-            </div>
+            <!-- نص الحديث المشكول -->
+            <p class="hadith-font text-purple-50 tracking-wide">${h.text}</p>
           `;
-
-          const card = row.querySelector(".hadith-card");
 
           let pressTimer = null;
           let isPressing = false;
@@ -437,7 +570,7 @@
 
           card.addEventListener("contextmenu", (e) => e.preventDefault());
 
-          container.appendChild(row);
+          container.appendChild(card);
         });
 
         displayedCount += nextItems.length;
