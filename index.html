@@ -8,17 +8,25 @@
   <!-- استدعاء الخطوط -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;600;700;800&family=El+Messiri:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --font-scale: 1;
-    }
-
     body { 
       font-family: 'Tajawal', sans-serif; 
       background-color: #07020d;
       background-image: 
         radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.15) 0%, transparent 65%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.10'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.12'/%3E%3Cpath d='M30 11L34.5 24.5L49 30L34.5 35.5L30 49L25.5 35.5L11 30L25.5 24.5Z' fill='none' stroke='%2338bdf8' stroke-width='0.7' stroke-opacity='0.08'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.10'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.12'/%3E%3C/svg%3E");
       background-attachment: fixed;
+    }
+
+    #resultsContainer {
+      --font-scale: 1;
+    }
+
+    .hadith-card {
+      user-select: none;
+      -webkit-user-select: none;
+      content-visibility: auto;
+      contain-intrinsic-size: 0 240px;
+      contain: layout style paint;
     }
 
     .hadith-font { 
@@ -26,8 +34,8 @@
       font-weight: 600;
       line-height: 2.3;
       letter-spacing: 0.3px;
+      text-align: center;
       font-size: calc(1.22rem * var(--font-scale, 1));
-      will-change: font-size;
     }
 
     .hadith-book-tag { font-size: calc(0.85rem * var(--font-scale, 1)); }
@@ -40,33 +48,31 @@
       text-shadow: 0 0 25px rgba(56, 189, 248, 0.7), 0 4px 8px rgba(0,0,0,0.95);
     }
     
-    /* يافطة ذهبية مذهبة ولامعة */
     .islamic-banner {
       background-color: #0e021d;
       background-image: 
         radial-gradient(ellipse at 50% 30%, rgba(255, 234, 128, 0.32) 0%, rgba(245, 158, 11, 0.16) 50%, transparent 75%),
-        linear-gradient(135deg, rgba(22, 6, 42, 0.88), rgba(9, 2, 20, 0.94)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 0 L52 28 L80 40 L52 52 L40 80 L28 52 L0 40 L28 28 Z' stroke='%23FFF275' stroke-width='1.8' stroke-opacity='0.95'/%3E%3Crect x='20' y='20' width='40' height='40' stroke='%23FFD700' stroke-width='1.4' stroke-opacity='0.85' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23FFFFFF' stroke-width='1.2' stroke-opacity='0.9'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23FFE57F' fill-opacity='0.55' stroke='%23FFF5A5' stroke-width='1.6' stroke-opacity='1'/%3E%3Cpath d='M40 6 L44 32 L70 40 L44 48 L40 74 L36 48 L10 40 L36 32 Z' stroke='%23FFFDE7' stroke-width='1.4' stroke-opacity='0.95'/%3E%3C/g%3E%3C/svg%3E");
-      border: 1.8px solid #FCD34D;
-      box-shadow: 0 15px 45px -5px rgba(0, 0, 0, 0.95), 0 0 35px 5px rgba(251, 191, 36, 0.4);
+        linear-gradient(135deg, rgba(22, 6, 42, 0.90), rgba(9, 2, 20, 0.95)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='40' cy='40' r='26' stroke='%23FFD700' stroke-width='1.2' stroke-opacity='0.45'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23FFF275' stroke-width='1' stroke-opacity='0.55'/%3E%3Cpolygon points='40,14 47,26 61,26 50,35 54,49 40,41 26,49 30,35 19,26 33,26' stroke='%23fbbf24' stroke-width='1.2' stroke-opacity='0.6' fill='%23fbbf24' fill-opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
+      border: 2px solid #FCD34D;
+      box-shadow: 0 15px 45px -5px rgba(0, 0, 0, 0.95), 0 0 35px 5px rgba(251, 191, 36, 0.35);
     }
 
-    /* مستطيل شريط الخط السلس */
     .font-control-box {
       background: linear-gradient(135deg, rgba(28, 8, 52, 0.95), rgba(12, 3, 26, 0.98));
       border: 1.8px solid #f59e0b;
       box-shadow: 0 8px 25px -4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(245, 158, 11, 0.22);
     }
 
-    /* الشريط المنزلق فائق السلاسة والخفة للموبايل والكمبيوتر */
     .smooth-range-track {
       position: relative;
       width: 100%;
-      height: 14px;
+      height: 12px;
       border-radius: 999px;
       background: linear-gradient(to right, #059669 0%, #10b981 40%, #f59e0b 75%, #fbbf24 100%);
       border: 1.5px solid #fde047;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+      pointer-events: none;
     }
 
     .font-range-input {
@@ -79,29 +85,30 @@
       background: transparent;
       margin: 0;
       cursor: pointer;
-      touch-action: pan-x;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
     }
     .font-range-input:focus { outline: none; }
     
     .font-range-input::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 30%, #ffffff 10%, #fde047 35%, #d97706 80%, #78350f 100%);
       border: 2px solid #ffffff;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 10px rgba(251,191,36,0.9);
       cursor: pointer;
       transform: translateZ(0);
     }
     .font-range-input::-moz-range-thumb {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 30%, #ffffff 10%, #fde047 35%, #d97706 80%, #78350f 100%);
       border: 2px solid #ffffff;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 10px rgba(251,191,36,0.9);
       cursor: pointer;
     }
 
@@ -109,10 +116,9 @@
       background-color: #15062c;
       background-image: 
         linear-gradient(180deg, rgba(32, 9, 65, 0.96), rgba(16, 4, 34, 0.98)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 0 L25 15 L40 20 L25 25 L20 40 L15 25 L0 20 L15 15 Z' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.18'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='12' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.2'/%3E%3C/svg%3E");
     }
 
-    /* الأنماط الخمسة لخلفيات الأحاديث */
     .card-theme-purple {
       background: linear-gradient(135deg, rgba(28, 8, 52, 0.92), rgba(16, 4, 32, 0.95));
       border: 1.5px solid rgba(168, 85, 247, 0.45);
@@ -149,22 +155,36 @@
   <!-- اليافطة العلوية -->
   <div class="pt-6 pb-2 px-4">
     <div class="max-w-3xl mx-auto islamic-banner relative rounded-3xl px-6 sm:px-10 py-8 text-center backdrop-blur-md overflow-hidden">
-      <!-- زخارف الأركان الذهبية -->
-      <div class="absolute top-2.5 right-3 text-amber-200 text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
-      <div class="absolute top-2.5 left-3 text-amber-200 text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
-      <div class="absolute bottom-2.5 right-3 text-amber-200 text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
-      <div class="absolute bottom-2.5 left-3 text-amber-200 text-lg drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
+      
+      <svg class="absolute top-2.5 right-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
+        <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
+      </svg>
+      <svg class="absolute top-2.5 left-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-x-[-1]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
+        <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
+      </svg>
+      <svg class="absolute bottom-2.5 right-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-y-[-1]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
+        <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
+      </svg>
+      <svg class="absolute bottom-2.5 left-3 w-8 h-8 text-amber-300/80 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-[-1]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 28 C4 14 14 4 28 4" stroke-linecap="round"/>
+        <path d="M4 18 C4 10 10 4 18 4" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <circle cx="9" cy="9" r="2.5" fill="#fde047"/>
+      </svg>
 
-      <!-- اسم الشيخ -->
-      <div class="flex items-center justify-center gap-3 sm:gap-4">
-        <span class="text-amber-200 text-2xl sm:text-3xl drop-shadow-[0_0_12px_rgba(254,240,138,1)]">✦</span>
+      <div class="flex items-center justify-center gap-3 sm:gap-5">
+        <span class="text-amber-300 text-2xl sm:text-3xl font-serif drop-shadow-[0_0_12px_rgba(254,240,138,1)] select-none">۞</span>
         <h2 class="title-font text-3xl sm:text-4xl md:text-5xl font-black text-sky-300">
           الشيخ / كرم عثمان
         </h2>
-        <span class="text-amber-200 text-2xl sm:text-3xl drop-shadow-[0_0_12px_rgba(254,240,138,1)]">✦</span>
+        <span class="text-amber-300 text-2xl sm:text-3xl font-serif drop-shadow-[0_0_12px_rgba(254,240,138,1)] select-none">۞</span>
       </div>
 
-      <!-- السطر التعريفي -->
       <div class="mt-5">
         <span class="inline-block text-sm sm:text-base md:text-lg text-sky-100 font-black tracking-widest bg-[#15072b]/95 px-8 py-2.5 rounded-full border-2 border-sky-400/60 shadow-[0_0_20px_rgba(56,189,248,0.4)]">
           محرك بحث أحاديث الصحيحين
@@ -173,10 +193,9 @@
     </div>
   </div>
 
-  <!-- مستطيل مجسم للتحكم في حجم الخط (سلس وخفيف وأيقونة SVG واضحة للموبايل) -->
+  <!-- مستطيل التحكم في حجم الخط -->
   <div class="max-w-xl mx-auto px-4 mt-3">
     <div class="font-control-box p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3.5 backdrop-blur-md">
-      <!-- أيقونة حجم الخط SVG عالية الدقة -->
       <div class="flex items-center gap-2.5 flex-shrink-0">
         <svg class="w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.85)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 19V7a3 3 0 0 1 6 0v12M4 13h6"/>
@@ -187,10 +206,9 @@
         </span>
       </div>
 
-      <!-- الشريط المنزلق السلس مع الكرة الذهبية 3D -->
-      <div class="relative w-full max-w-xs flex items-center">
+      <div class="relative w-full max-w-xs flex items-center h-8">
         <div class="smooth-range-track"></div>
-        <input type="range" id="fontSizeSlider" min="1" max="1.55" step="0.01" value="1" dir="ltr" class="font-range-input">
+        <input type="range" id="fontSizeSlider" min="1" max="1.55" step="0.02" value="1" dir="ltr" class="font-range-input">
       </div>
 
       <span id="fontSizeDisplay" class="text-xs sm:text-sm font-black text-amber-300 font-mono px-3 py-1 rounded-xl bg-purple-950/90 border border-amber-400/40 shadow-inner">
@@ -199,38 +217,63 @@
     </div>
   </div>
 
-  <!-- شريط العنوان والفلترة في منتصف الصفحة -->
+  <!-- شريط العنوان والفلترة في منتصف الصفحة (مع أيقونة الكتاب المجسم الجديد 3D) -->
   <header class="border-b border-purple-900/60 bg-[#120524]/90 backdrop-blur sticky top-0 z-40 py-4 px-6 shadow-md shadow-purple-950/40 mt-4">
     <div class="max-w-5xl mx-auto flex flex-col items-center justify-center text-center gap-3">
       
-      <!-- كتاب 3D مجسم وموسوعة الصحيحين في المنتصف -->
-      <div class="flex items-center justify-center gap-3 sm:gap-4">
-        <svg class="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-[0_4px_14px_rgba(251,191,36,0.65)]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- أيقونة كتاب ملون مجسم ثلاثي الأبعاد فخم بجانب موسوعة الصحيحين -->
+      <div class="flex items-center justify-center gap-3.5 sm:gap-5">
+        <svg class="w-12 h-12 sm:w-16 sm:h-16 drop-shadow-[0_6px_16px_rgba(251,191,36,0.75)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="bookCoverLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#047857" />
-              <stop offset="100%" stop-color="#022c22" />
+            <!-- تدرجات غلاف الكتاب الأيمن والأيسر -->
+            <linearGradient id="coverLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#059669"/>
+              <stop offset="100%" stop-color="#022c22"/>
             </linearGradient>
-            <linearGradient id="bookCoverRight" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#059669" />
-              <stop offset="100%" stop-color="#064e3b" />
+            <linearGradient id="coverRight" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#047857"/>
             </linearGradient>
-            <linearGradient id="goldPage" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#fef08a" />
-              <stop offset="50%" stop-color="#f59e0b" />
-              <stop offset="100%" stop-color="#b45309" />
+            <!-- تدرج صفحات الكتاب المذهبة -->
+            <linearGradient id="pagesGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="50%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#b45309"/>
+            </linearGradient>
+            <!-- تدرج الشريط الذهبي الفاصل -->
+            <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#fbbf24"/>
+              <stop offset="50%" stop-color="#fef08a"/>
+              <stop offset="100%" stop-color="#d97706"/>
             </linearGradient>
           </defs>
-          <path d="M32 54 L32 18" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M6 46 C16 43 28 47 32 52 C32 46 20 40 6 42 Z" fill="url(#goldPage)" opacity="0.9"/>
-          <path d="M58 46 C48 43 36 47 32 52 C32 46 44 40 58 42 Z" fill="url(#goldPage)" opacity="0.9"/>
-          <path d="M6 16 C18 12 28 16 32 20 L32 50 C28 46 18 42 6 46 Z" fill="url(#bookCoverLeft)" stroke="#fcd34d" stroke-width="1.6"/>
-          <path d="M58 16 C46 12 36 16 32 20 L32 50 C36 46 46 42 58 46 Z" fill="url(#bookCoverRight)" stroke="#fcd34d" stroke-width="1.6"/>
-          <circle cx="19" cy="30" r="5" fill="none" stroke="#fef08a" stroke-width="1.2" opacity="0.85"/>
-          <path d="M19 23 L19 37 M12 30 L26 30" stroke="#fef08a" stroke-width="1" opacity="0.7"/>
-          <circle cx="45" cy="30" r="5" fill="none" stroke="#fef08a" stroke-width="1.2" opacity="0.85"/>
-          <path d="M45 23 L45 37 M38 30 L52 30" stroke="#fef08a" stroke-width="1" opacity="0.7"/>
-          <path d="M32 18 L32 40 L35 36 L38 40 L38 20" fill="#f59e0b" stroke="#fde047" stroke-width="0.8"/>
+
+          <!-- الظل السفلي للكتاب -->
+          <ellipse cx="50" cy="88" rx="35" ry="6" fill="#000000" opacity="0.65"/>
+
+          <!-- حواف الصفحات السفلية والجانبية -->
+          <path d="M15 72 L50 82 L85 72 L85 77 L50 87 L15 77 Z" fill="url(#pagesGrad)"/>
+          
+          <!-- الصفحات الداخلية المفتوحة -->
+          <path d="M15 32 C25 28 42 33 50 38 L50 78 C42 73 25 68 15 72 Z" fill="#fffbeb" stroke="#fef08a" stroke-width="1.5"/>
+          <path d="M85 32 C75 28 58 33 50 38 L50 78 C58 73 75 68 85 72 Z" fill="#fffbeb" stroke="#fef08a" stroke-width="1.5"/>
+
+          <!-- الغلاف الأيسر المجسم -->
+          <path d="M12 26 C22 22 40 27 50 33 L50 78 C40 72 22 67 12 71 Z" fill="url(#coverLeft)" stroke="#fde047" stroke-width="2"/>
+          
+          <!-- الغلاف الأيمن المجسم -->
+          <path d="M88 26 C78 22 60 27 50 33 L50 78 C60 72 78 67 88 71 Z" fill="url(#coverRight)" stroke="#fde047" stroke-width="2"/>
+
+          <!-- كعب الكتاب في المنتصف وشريط علامة القياس الذهبي -->
+          <path d="M50 33 L50 78" stroke="#022c22" stroke-width="3"/>
+          <path d="M48 33 L52 33 L53 50 L47 50 Z" fill="url(#goldRibbon)"/>
+
+          <!-- زخارف إسلامية منقوشة على الغلافين -->
+          <circle cx="28" cy="48" r="7" fill="none" stroke="#fde047" stroke-width="1.2" opacity="0.85"/>
+          <path d="M28 43 L28 53 M23 48 L33 48" stroke="#fde047" stroke-width="1" opacity="0.85"/>
+
+          <circle cx="72" cy="48" r="7" fill="none" stroke="#fde047" stroke-width="1.2" opacity="0.85"/>
+          <path d="M72 43 L72 53 M67 48 L77 48" stroke="#fde047" stroke-width="1" opacity="0.85"/>
         </svg>
 
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-amber-300 tracking-wide drop-shadow-[0_2px_14px_rgba(251,191,36,0.6)]">
@@ -238,15 +281,14 @@
         </h1>
       </div>
 
-      <!-- سطر البحث الفوري أسمك وأوضح -->
       <p class="text-sm sm:text-base md:text-lg font-black text-purple-200 tracking-wide drop-shadow-md">
         البحث الفوري في أحاديث صحيح الإمام البخاري وصحيح الإمام مسلم
       </p>
 
-      <!-- قائمة الاختيار المنسدلة كالستارة -->
+      <!-- قائمة الاختيار المنسدلة -->
       <div class="relative z-50 mt-1" id="customDropdownWrapper">
         <button type="button" id="dropdownBtn" class="flex items-center justify-between gap-3 bg-gradient-to-r from-[#1c0a38] via-[#2a0e54] to-[#1c0a38] border-2 border-amber-400/70 hover:border-amber-300 px-5 py-2 rounded-2xl shadow-[0_4px_18px_rgba(245,158,11,0.25)] transition-all active:scale-95 cursor-pointer">
-          <span class="text-amber-400 text-xs">❖</span>
+          <span class="text-amber-300 text-xs">۞</span>
           <span id="selectedOptionText" class="font-black text-amber-200 text-sm sm:text-base tracking-wide drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
             كلا الصحيحين
           </span>
@@ -261,7 +303,7 @@
           <div class="p-2 space-y-1.5">
             <button type="button" data-value="all" class="dropdown-option w-full flex items-center justify-between px-4 py-3 rounded-xl text-right font-black text-sm sm:text-base text-amber-100 hover:text-white hover:bg-amber-500/25 border border-transparent hover:border-amber-400/40 transition-all group">
               <span class="flex items-center gap-2.5">
-                <span class="text-amber-300 text-xs group-hover:scale-125 transition-transform">✦</span>
+                <span class="text-amber-300 text-xs">۞</span>
                 <span class="option-label text-amber-200 drop-shadow-[0_0_6px_rgba(252,211,77,0.7)]">كلا الصحيحين</span>
               </span>
               <span class="check-icon text-amber-300 font-black text-base">✓</span>
@@ -269,7 +311,7 @@
 
             <button type="button" data-value="bukhari" class="dropdown-option w-full flex items-center justify-between px-4 py-3 rounded-xl text-right font-black text-sm sm:text-base text-amber-100 hover:text-white hover:bg-amber-500/25 border border-transparent hover:border-amber-400/40 transition-all group">
               <span class="flex items-center gap-2.5">
-                <span class="text-amber-300 text-xs group-hover:scale-125 transition-transform">✦</span>
+                <span class="text-amber-300 text-xs">۞</span>
                 <span class="option-label text-amber-200">صحيح البخاري فقط</span>
               </span>
               <span class="check-icon text-amber-300 font-black text-base hidden">✓</span>
@@ -277,7 +319,7 @@
 
             <button type="button" data-value="muslim" class="dropdown-option w-full flex items-center justify-between px-4 py-3 rounded-xl text-right font-black text-sm sm:text-base text-amber-100 hover:text-white hover:bg-emerald-500/25 border border-transparent hover:border-emerald-400/40 transition-all group">
               <span class="flex items-center gap-2.5">
-                <span class="text-emerald-300 text-xs group-hover:scale-125 transition-transform">✦</span>
+                <span class="text-emerald-300 text-xs">۞</span>
                 <span class="option-label text-emerald-200">صحيح مسلم فقط</span>
               </span>
               <span class="check-icon text-emerald-300 font-black text-base hidden">✓</span>
@@ -300,18 +342,18 @@
         <input type="search" id="searchInput" 
                enterkeyhint="search"
                autocomplete="off"
-               placeholder="ابحث عن كلمة، راوٍ، أو مسألة فقهية (مثال: إنما الأعمال بالنيات)..." 
+               placeholder="ابحث عن كلمة، راوٍ، أو مسألة فقهية..." 
                class="w-full bg-[#062c1d] border-2 border-emerald-600/70 rounded-2xl pr-16 pl-6 py-5 sm:py-6 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 text-white placeholder-emerald-200/60 shadow-2xl transition">
       </form>
 
       <!-- سطر سفلي مستقل لجملة الإجمالي -->
       <div class="mt-4 flex items-center justify-center">
-        <div class="inline-flex items-center gap-2 bg-[#062c1d] border-2 border-emerald-500/70 px-6 py-2.5 rounded-2xl shadow-lg">
-          <span class="text-emerald-400 text-sm">❖</span>
+        <div class="inline-flex items-center gap-2.5 bg-[#062c1d] border-2 border-emerald-500/70 px-6 py-2.5 rounded-2xl shadow-lg">
+          <span class="text-emerald-300 text-xs">۞</span>
           <span id="resultCount" class="text-sm sm:text-base font-black text-amber-300 tracking-wide drop-shadow-[0_0_8px_rgba(252,211,77,0.7)]">
             جاري التجهيز...
           </span>
-          <span class="text-emerald-400 text-sm">❖</span>
+          <span class="text-emerald-300 text-xs">۞</span>
         </div>
       </div>
     </div>
@@ -322,7 +364,7 @@
       <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
-    <!-- قائمة النتائج مع التناوب الدقيق للألوان الخمسة -->
+    <!-- قائمة النتائج -->
     <div id="resultsContainer" class="space-y-6"></div>
 
     <!-- مؤشر التحميل الدائري اللانهائي -->
@@ -350,30 +392,28 @@
     let isLoadingMore = false;
     let selectedBookFilter = "all";
 
-    // مصفوفة تعاقب الألوان الخمسة الفاخرة بنفس الترتيب المطلوب تماماً
     const colorThemes = [
-      "card-theme-purple",   // 1. بنفسجي غامق
-      "card-theme-burgundy", // 2. أحمر غامق / بني محمر
-      "card-theme-blue",     // 3. أزرق غامق
-      "card-theme-brown",    // 4. بني غامق
-      "card-theme-green"     // 5. أخضر غامق
+      "card-theme-purple",
+      "card-theme-burgundy",
+      "card-theme-blue",
+      "card-theme-brown",
+      "card-theme-green"
     ];
 
-    // سلاسة شريط التحكم في حجم الخط باستخدام requestAnimationFrame
     const fontSizeSlider = document.getElementById("fontSizeSlider");
     const fontSizeDisplay = document.getElementById("fontSizeDisplay");
+    const resultsContainer = document.getElementById("resultsContainer");
     let fontRAF = null;
 
     fontSizeSlider.addEventListener("input", (e) => {
-      const scale = parseFloat(e.target.value);
-      if (fontSizeDisplay) {
-        fontSizeDisplay.innerText = `${Math.round(scale * 100)}%`;
-      }
+      const scale = e.target.value;
+      fontSizeDisplay.textContent = Math.round(scale * 100) + "%";
+
       if (fontRAF) cancelAnimationFrame(fontRAF);
       fontRAF = requestAnimationFrame(() => {
-        document.documentElement.style.setProperty("--font-scale", scale);
+        resultsContainer.style.setProperty("--font-scale", scale);
       });
-    });
+    }, { passive: true });
 
     function cleanCorruptedChars(text) {
       if (!text) return "";
@@ -392,7 +432,7 @@
         .trim();
     }
 
-    function copyHadithText(h, cardElement) {
+    function copyHadithText(h) {
       const fullText = `${h.text}\n\n[${h.book} - رقم ح : ${h.number}]`;
 
       if (navigator.clipboard && window.isSecureContext) {
@@ -405,7 +445,7 @@
         try { navigator.vibrate(50); } catch(e){}
       }
 
-      showCopyModal(cardElement);
+      showCopyModal();
     }
 
     function fallbackCopy(text) {
@@ -420,24 +460,25 @@
       document.body.removeChild(textArea);
     }
 
-    function showCopyModal(card) {
-      const oldModal = card.querySelector(".copy-modal-overlay");
+    function showCopyModal() {
+      const oldModal = document.getElementById("screenCenterCopyModal");
       if (oldModal) oldModal.remove();
 
       const modal = document.createElement("div");
-      modal.className = "copy-modal-overlay absolute inset-0 z-30 flex items-center justify-center bg-sky-950/80 backdrop-blur-sm rounded-2xl transition-all duration-300 opacity-0 pointer-events-none";
+      modal.id = "screenCenterCopyModal";
+      modal.className = "fixed inset-0 z-50 flex items-center justify-center pointer-events-none transition-all duration-300 opacity-0";
       modal.innerHTML = `
-        <div class="px-6 py-4 bg-sky-900/95 border-2 border-sky-400 rounded-2xl shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center gap-3 transform scale-90 transition-transform duration-300">
-          <svg class="w-7 h-7 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <div class="px-7 py-4 bg-sky-950/95 border-2 border-sky-400 rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.85)] backdrop-blur-md flex items-center gap-3.5 transform scale-90 transition-transform duration-300">
+          <svg class="w-8 h-8 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
           </svg>
-          <span class="text-amber-300 font-black text-base sm:text-lg tracking-wide drop-shadow-[0_0_10px_rgba(252,211,77,0.9)]">
+          <span class="text-amber-300 font-black text-base sm:text-xl tracking-wide drop-shadow-[0_0_10px_rgba(252,211,77,0.9)]">
             تم نسخ الحديث الشريف
           </span>
         </div>
       `;
 
-      card.appendChild(modal);
+      document.body.appendChild(modal);
 
       requestAnimationFrame(() => {
         modal.classList.remove("opacity-0");
@@ -508,11 +549,11 @@
       });
 
       displayedCount = 0;
-      document.getElementById("resultsContainer").innerHTML = "";
+      resultsContainer.innerHTML = "";
       document.getElementById("resultCount").innerText = `نتائج البحث: ${filteredHadiths.length.toLocaleString('ar-EG')} حديث`;
 
       if (filteredHadiths.length === 0) {
-        document.getElementById("resultsContainer").innerHTML = `<div class="text-center py-16 text-purple-400 font-bold text-lg">لا توجد نتائج مطابقة لما بحثت عنه.</div>`;
+        resultsContainer.innerHTML = `<div class="text-center py-16 text-purple-400 font-bold text-lg">لا توجد نتائج مطابقة لما بحثت عنه.</div>`;
         return;
       }
 
@@ -527,25 +568,22 @@
       if (displayedCount > 0) loader.classList.remove("hidden");
 
       setTimeout(() => {
-        const container = document.getElementById("resultsContainer");
         const nextItems = filteredHadiths.slice(displayedCount, displayedCount + batchSize);
+        const fragment = document.createDocumentFragment();
 
         nextItems.forEach((h, idx) => {
           const serialNum = displayedCount + idx + 1;
-          // التبديل الدوري للألوان الخمسة (0, 1, 2, 3, 4)
           const themeClass = colorThemes[(serialNum - 1) % 5];
 
           const card = document.createElement("div");
-          card.className = `relative w-full p-6 sm:p-7 ${themeClass} rounded-2xl transition-all duration-200 shadow-xl`;
+          card.className = `hadith-card relative w-full p-6 sm:p-7 ${themeClass} rounded-2xl shadow-xl`;
 
           card.innerHTML = `
-            <!-- الشريط العلوي للبطاقة: اسم الكتاب، رقم المستطيل في النص، واختصار رقم ح : X على اليسار -->
             <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3 gap-2">
               <span class="hadith-book-tag font-black px-3.5 py-1.5 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">
                 ${h.book}
               </span>
               
-              <!-- رقم المستطيل في أعلى المستطيل في المنتصف -->
               <div class="badge-center-counter px-4 py-1 rounded-xl flex items-center justify-center gap-1.5 bg-gradient-to-b from-[#064e3b] to-[#022013] border-2 border-emerald-400 shadow-[0_3px_12px_rgba(2,44,25,0.85)]">
                 <span class="text-emerald-300 text-xs font-bold">#</span>
                 <span class="text-amber-300 font-black font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
@@ -553,17 +591,14 @@
                 </span>
               </div>
 
-              <!-- اختصار: رقم ح : X بخط واضح وأسمك -->
               <span class="hadith-num-tag font-black text-amber-300 bg-amber-400/10 border border-amber-400/35 px-3.5 py-1.5 rounded-xl shadow-sm tracking-wide">
                 رقم ح : <span class="text-white font-black">${h.number}</span>
               </span>
             </div>
 
-            <!-- نص الحديث المشكول -->
             <p class="hadith-font text-purple-50 tracking-wide">${h.text}</p>
 
-            <!-- زر نسخ الحديث في أسفل كل حديث -->
-            <div class="mt-5 pt-3.5 border-t border-white/10 flex justify-end">
+            <div class="mt-5 pt-3.5 border-t border-white/10 flex justify-center sm:justify-end">
               <button type="button" class="copy-action-btn flex items-center gap-2 bg-[#120524]/90 hover:bg-amber-400 hover:text-slate-950 text-amber-300 font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-amber-400/60 shadow-md transition-all active:scale-95 cursor-pointer">
                 <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
@@ -573,14 +608,12 @@
             </div>
           `;
 
-          // نسخ بالضغط على الزر المخصص
           const copyBtn = card.querySelector(".copy-action-btn");
           copyBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            copyHadithText(h, card);
+            copyHadithText(h);
           });
 
-          // نسخ إضافي بالضغط المطول لمدة ثانيتين
           let pressTimer = null;
           let isPressing = false;
 
@@ -590,7 +623,7 @@
             isPressing = true;
             pressTimer = setTimeout(() => {
               if (isPressing) {
-                copyHadithText(h, card);
+                copyHadithText(h);
                 isPressing = false;
               }
             }, 2000);
@@ -615,16 +648,16 @@
 
           card.addEventListener("contextmenu", (e) => e.preventDefault());
 
-          container.appendChild(card);
+          fragment.appendChild(card);
         });
 
+        resultsContainer.appendChild(fragment);
         displayedCount += nextItems.length;
         loader.classList.add("hidden");
         isLoadingMore = false;
-      }, 200);
+      }, 150);
     }
 
-    // إدارة الزر العائم والتمرير
     const backToTopBtn = document.getElementById("backToTopBtn");
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -644,7 +677,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // عناصر البحث ومعالجة لوحة المفاتيح
     const searchInput = document.getElementById("searchInput");
     const searchForm = document.getElementById("searchForm");
 
@@ -664,7 +696,6 @@
       }
     });
 
-    // التحكم في الستارة المنسدلة
     const dropdownBtn = document.getElementById("dropdownBtn");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const dropdownArrow = document.getElementById("dropdownArrow");
