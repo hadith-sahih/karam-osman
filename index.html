@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- استدعاء خط المسيري التراثي المزخرف وخطوط الحديث -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=El+Messiri:wght@600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body { 
@@ -20,38 +19,43 @@
     .title-font { 
       font-family: 'El Messiri', serif; 
       letter-spacing: 1px;
-      text-shadow: 0 0 20px rgba(56, 189, 248, 0.55), 0 3px 6px rgba(0,0,0,0.9);
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.6), 0 3px 6px rgba(0,0,0,0.9);
     }
-    .islamic-box {
-      background: linear-gradient(135deg, rgba(18, 5, 36, 0.98), rgba(8, 2, 18, 0.98));
-      border: 1.5px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 12px 35px -5px rgba(2, 6, 23, 0.9), 0 0 20px 2px rgba(56, 189, 248, 0.15);
+    .islamic-banner {
+      background-color: #120326;
+      background-image: 
+        linear-gradient(135deg, rgba(20, 5, 42, 0.88), rgba(9, 2, 20, 0.90)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-width='1.2'%3E%3Cpath d='M40 0 L52 28 L80 40 L52 52 L40 80 L28 52 L0 40 L28 28 Z' stroke='%2338bdf8' stroke-opacity='0.35'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23fbbf24' stroke-opacity='0.45'/%3E%3Cpath d='M40 12 L46 34 L68 40 L46 46 L40 68 L34 46 L12 40 L34 34 Z' stroke='%23c084fc' stroke-opacity='0.35'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23fbbf24' fill-opacity='0.18' stroke='%23fbbf24' stroke-opacity='0.6'/%3E%3C/g%3E%3C/svg%3E");
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.9), 0 0 25px 2px rgba(56, 189, 248, 0.2);
+    }
+    .badge-counter {
+      background: radial-gradient(circle at 30% 30%, #064e3b, #022013);
+      border: 1.5px solid #10b981;
+      box-shadow: 0 4px 15px rgba(2, 44, 25, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
 <body class="text-purple-100 min-h-screen">
 
-  <!-- القسم العلوي: اسم الشيخ بالخط المزخرف والوصف المستقل -->
+  <!-- اليافطة العلوية المزخرفة -->
   <div class="pt-6 pb-2 px-4">
-    <div class="max-w-xl mx-auto islamic-box relative rounded-2xl px-6 py-6 text-center backdrop-blur-md overflow-hidden">
-      <!-- زخارف الأركان التراثية -->
-      <div class="absolute top-2 right-3 text-amber-400/50 text-xs">❖</div>
-      <div class="absolute top-2 left-3 text-amber-400/50 text-xs">❖</div>
-      <div class="absolute bottom-2 right-3 text-amber-400/50 text-xs">❖</div>
-      <div class="absolute bottom-2 left-3 text-amber-400/50 text-xs">❖</div>
+    <div class="max-w-2xl mx-auto islamic-banner relative rounded-3xl px-8 py-7 text-center backdrop-blur-md overflow-hidden">
+      <div class="absolute top-2.5 right-3 text-amber-400/60 text-sm">❖</div>
+      <div class="absolute top-2.5 left-3 text-amber-400/60 text-sm">❖</div>
+      <div class="absolute bottom-2.5 right-3 text-amber-400/60 text-sm">❖</div>
+      <div class="absolute bottom-2.5 left-3 text-amber-400/60 text-sm">❖</div>
 
-      <!-- اسم الشيخ مزخرف ومجسم -->
       <div class="flex items-center justify-center gap-3">
-        <span class="text-amber-400 text-base">✦</span>
+        <span class="text-amber-400 text-lg">✦</span>
         <h2 class="title-font text-2xl sm:text-3xl md:text-4xl font-bold text-sky-400">
           الشيخ / كرم عثمان
         </h2>
-        <span class="text-amber-400 text-base">✦</span>
+        <span class="text-amber-400 text-lg">✦</span>
       </div>
 
-      <!-- الوصف بمسافة نازلة ولون أزرق أفتح -->
-      <div class="mt-4 pt-1">
-        <span class="text-xs sm:text-sm text-sky-200 font-semibold tracking-widest bg-purple-950/70 px-5 py-1.5 rounded-full border border-sky-400/30 shadow-md">
+      <div class="mt-4">
+        <span class="text-xs sm:text-sm text-sky-200 font-bold tracking-widest bg-[#15072b]/80 px-6 py-1.5 rounded-full border border-sky-400/40 shadow-inner">
           محرك بحث أحاديث الصحيحين
         </span>
       </div>
@@ -79,9 +83,9 @@
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-6 py-8">
-    <!-- صندوق البحث بالأيقونة المجسمة والخلفية الخضراء الداكنة والكتابة البيضاء -->
-    <div class="relative mb-6">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <!-- صندوق البحث -->
+    <div class="relative mb-8">
       <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none">
         <svg class="w-6 h-6 text-emerald-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"></path>
@@ -93,19 +97,19 @@
       <span id="resultCount" class="absolute left-4 top-4 text-xs bg-[#021d12] text-emerald-300 border border-emerald-700/60 px-3 py-1.5 rounded-full font-medium shadow-inner">جاهز للبحث</span>
     </div>
 
-    <!-- مؤشر التحميل الأولي للبيانات -->
+    <!-- مؤشر التحميل الأولي -->
     <div id="loader" class="text-center py-20">
       <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-400 border-t-transparent mb-3 shadow-[0_0_15px_rgba(251,191,36,0.4)]"></div>
       <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
-    <!-- حاوية عرض الأحاديث -->
-    <div id="resultsContainer" class="space-y-4"></div>
+    <!-- قائمة النتائج مع الترقيم الخارجي -->
+    <div id="resultsContainer" class="space-y-5"></div>
 
-    <!-- أيقونة التحميل الدائرية الصفراء المتحركة عند النزول لأسفل الصفحة -->
+    <!-- مؤشر التحميل الدائري اللانهائي -->
     <div id="infiniteLoader" class="text-center py-8 hidden">
       <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-400 border-t-transparent shadow-[0_0_15px_rgba(251,191,36,0.5)]"></div>
-      <p class="text-amber-300/80 text-xs mt-2 font-medium">جاري تحميل المزيد من الأحاديث...</p>
+      <p class="text-amber-300 text-xs mt-2 font-medium">جاري تحميل المزيد من الأحاديث...</p>
     </div>
   </main>
 
@@ -116,10 +120,18 @@
     const batchSize = 15;
     let isLoadingMore = false;
 
-    // تطبيع النصوص العربية وإزالة التشكيل وتوحيد الحروف
-    function normalizeArabic(text) {
+    // دالة تنظيف الرموز التالفة من النصوص
+    function cleanCorruptedChars(text) {
       if (!text) return "";
       return text
+        .replace(/[\uFFFD\uFFFE\uFEFF]/g, "") // إزالة رموز الاستبدال والتلف
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, ""); // إزالة المحارف غير المرئية
+    }
+
+    // دالة تطبيع نصوص البحث
+    function normalizeArabic(text) {
+      if (!text) return "";
+      return cleanCorruptedChars(text)
         .replace(/[\u064B-\u065F\u0670]/g, "")
         .replace(/[إأآا]/g, "ا")
         .replace(/ى/g, "ي")
@@ -127,7 +139,6 @@
         .trim();
     }
 
-    // جلب ملفات البيانات
     async function loadHadithData() {
       try {
         const [bukhariRes, muslimRes] = await Promise.all([
@@ -138,21 +149,27 @@
         const bukhariData = await bukhariRes.json();
         const muslimData = await muslimRes.json();
 
-        const bukhariFormatted = bukhariData.hadiths.map(h => ({
-          book: "صحيح البخاري",
-          id: "bukhari",
-          number: h.hadithnumber,
-          text: h.text,
-          normalized: normalizeArabic(h.text)
-        }));
+        const bukhariFormatted = bukhariData.hadiths.map(h => {
+          const clean = cleanCorruptedChars(h.text);
+          return {
+            book: "صحيح البخاري",
+            id: "bukhari",
+            number: h.hadithnumber,
+            text: clean,
+            normalized: normalizeArabic(clean)
+          };
+        });
 
-        const muslimFormatted = muslimData.hadiths.map(h => ({
-          book: "صحيح مسلم",
-          id: "muslim",
-          number: h.hadithnumber,
-          text: h.text,
-          normalized: normalizeArabic(h.text)
-        }));
+        const muslimFormatted = muslimData.hadiths.map(h => {
+          const clean = cleanCorruptedChars(h.text);
+          return {
+            book: "صحيح مسلم",
+            id: "muslim",
+            number: h.hadithnumber,
+            text: clean,
+            normalized: normalizeArabic(clean)
+          };
+        });
 
         allHadiths = [...bukhariFormatted, ...muslimFormatted];
         document.getElementById("loader").classList.add("hidden");
@@ -164,7 +181,6 @@
       }
     }
 
-    // فلترة البحث
     function applyFilter() {
       const query = normalizeArabic(document.getElementById("searchInput").value);
       const selectedBook = document.getElementById("bookFilter").value;
@@ -187,7 +203,6 @@
       renderNextBatch();
     }
 
-    // تحميل وعرض دفعة جديدة من الأحاديث عند التمرير
     function renderNextBatch() {
       if (isLoadingMore || displayedCount >= filteredHadiths.length) return;
       
@@ -199,19 +214,30 @@
         const container = document.getElementById("resultsContainer");
         const nextItems = filteredHadiths.slice(displayedCount, displayedCount + batchSize);
 
-        nextItems.forEach(h => {
-          const card = document.createElement("div");
-          card.className = "p-6 bg-[#16072b]/75 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-lg";
-          card.innerHTML = `
-            <div class="flex items-center justify-between mb-3 border-b border-purple-800/50 pb-2.5">
-              <span class="text-xs font-bold px-3 py-1 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'}">
-                ${h.book}
+        nextItems.forEach((h, idx) => {
+          const serialNum = displayedCount + idx + 1;
+
+          const row = document.createElement("div");
+          row.className = "flex items-center gap-3 sm:gap-4 group";
+
+          row.innerHTML = `
+            <div class="flex-shrink-0 w-11 h-11 sm:w-13 sm:h-13 badge-counter rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105">
+              <span class="text-amber-300 font-extrabold text-base sm:text-lg font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
+                ${serialNum}
               </span>
-              <span class="text-xs text-purple-400 font-mono">رقم الحديث: ${h.number}</span>
             </div>
-            <p class="hadith-font text-xl leading-loose text-purple-50 tracking-wide">${h.text}</p>
+
+            <div class="flex-grow p-6 bg-[#16072b]/80 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-lg">
+              <div class="flex items-center justify-between mb-3 border-b border-purple-800/50 pb-2.5">
+                <span class="text-xs font-bold px-3 py-1 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'}">
+                  ${h.book}
+                </span>
+                <span class="text-xs text-purple-400 font-mono">رقم الحديث: ${h.number}</span>
+              </div>
+              <p class="hadith-font text-xl leading-loose text-purple-50 tracking-wide">${h.text}</p>
+            </div>
           `;
-          container.appendChild(card);
+          container.appendChild(row);
         });
 
         displayedCount += nextItems.length;
@@ -220,7 +246,6 @@
       }, 250);
     }
 
-    // رصد النزول لأسفل الصفحة (Infinite Scroll Listener)
     window.addEventListener("scroll", () => {
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 500) {
         renderNextBatch();
