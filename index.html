@@ -5,42 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- استدعاء خط نوتو نسخ للأحاديث وخطوط العناوين التراثية -->
+  <!-- استدعاء الخطوط -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;600;700;800&family=El+Messiri:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --font-scale: 1; /* مقياس تكبير الخط الافتراضي */
+      --font-scale: 1;
     }
 
     body { 
       font-family: 'Tajawal', sans-serif; 
-      background-color: #080210;
+      background-color: #07020d;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 65%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.12'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.14'/%3E%3Cpath d='M30 11L34.5 24.5L49 30L34.5 35.5L30 49L25.5 35.5L11 30L25.5 24.5Z' fill='none' stroke='%2338bdf8' stroke-width='0.7' stroke-opacity='0.10'/%3E%3C/svg%3E");
+        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.15) 0%, transparent 65%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.10'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.12'/%3E%3Cpath d='M30 11L34.5 24.5L49 30L34.5 35.5L30 49L25.5 35.5L11 30L25.5 24.5Z' fill='none' stroke='%2338bdf8' stroke-width='0.7' stroke-opacity='0.08'/%3E%3C/svg%3E");
       background-attachment: fixed;
     }
 
-    /* خط الحديث المشكول يتجاوب مع مقياس التكبير */
     .hadith-font { 
       font-family: 'Noto Naskh Arabic', serif; 
       font-weight: 600;
       line-height: 2.3;
       letter-spacing: 0.3px;
       font-size: calc(1.22rem * var(--font-scale, 1));
+      will-change: font-size;
     }
 
-    .hadith-book-tag {
-      font-size: calc(0.85rem * var(--font-scale, 1));
-    }
-
-    .hadith-num-tag {
-      font-size: calc(0.85rem * var(--font-scale, 1));
-    }
-
-    .badge-center-counter {
-      font-size: calc(0.95rem * var(--font-scale, 1));
-    }
+    .hadith-book-tag { font-size: calc(0.85rem * var(--font-scale, 1)); }
+    .hadith-num-tag { font-size: calc(0.85rem * var(--font-scale, 1)); }
+    .badge-center-counter { font-size: calc(0.95rem * var(--font-scale, 1)); }
 
     .title-font { 
       font-family: 'El Messiri', serif; 
@@ -48,76 +40,108 @@
       text-shadow: 0 0 25px rgba(56, 189, 248, 0.7), 0 4px 8px rgba(0,0,0,0.95);
     }
     
-    /* يافطة بنقوش وزخارف إسلامية ذهبية متلألئة */
+    /* يافطة ذهبية مذهبة ولامعة */
     .islamic-banner {
       background-color: #0e021d;
       background-image: 
-        radial-gradient(ellipse at 50% 30%, rgba(255, 234, 128, 0.35) 0%, rgba(245, 158, 11, 0.18) 50%, transparent 75%),
+        radial-gradient(ellipse at 50% 30%, rgba(255, 234, 128, 0.32) 0%, rgba(245, 158, 11, 0.16) 50%, transparent 75%),
         linear-gradient(135deg, rgba(22, 6, 42, 0.88), rgba(9, 2, 20, 0.94)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 0 L52 28 L80 40 L52 52 L40 80 L28 52 L0 40 L28 28 Z' stroke='%23FFF275' stroke-width='1.8' stroke-opacity='0.95'/%3E%3Crect x='20' y='20' width='40' height='40' stroke='%23FFD700' stroke-width='1.4' stroke-opacity='0.85' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23FFFFFF' stroke-width='1.2' stroke-opacity='0.9'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23FFE57F' fill-opacity='0.55' stroke='%23FFF5A5' stroke-width='1.6' stroke-opacity='1'/%3E%3Cpath d='M40 6 L44 32 L70 40 L44 48 L40 74 L36 48 L10 40 L36 32 Z' stroke='%23FFFDE7' stroke-width='1.4' stroke-opacity='0.95'/%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='70' cy='10' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='10' cy='70' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='70' cy='70' r='1.5' fill='%23FFFFFF'/%3E%3C/g%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 0 L52 28 L80 40 L52 52 L40 80 L28 52 L0 40 L28 28 Z' stroke='%23FFF275' stroke-width='1.8' stroke-opacity='0.95'/%3E%3Crect x='20' y='20' width='40' height='40' stroke='%23FFD700' stroke-width='1.4' stroke-opacity='0.85' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23FFFFFF' stroke-width='1.2' stroke-opacity='0.9'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23FFE57F' fill-opacity='0.55' stroke='%23FFF5A5' stroke-width='1.6' stroke-opacity='1'/%3E%3Cpath d='M40 6 L44 32 L70 40 L44 48 L40 74 L36 48 L10 40 L36 32 Z' stroke='%23FFFDE7' stroke-width='1.4' stroke-opacity='0.95'/%3E%3C/g%3E%3C/svg%3E");
       border: 1.8px solid #FCD34D;
-      box-shadow: 
-        0 15px 45px -5px rgba(0, 0, 0, 0.95), 
-        0 0 45px 6px rgba(251, 191, 36, 0.45), 
-        0 0 15px 2px rgba(255, 255, 255, 0.35),
-        inset 0 0 35px rgba(251, 191, 36, 0.25);
+      box-shadow: 0 15px 45px -5px rgba(0, 0, 0, 0.95), 0 0 35px 5px rgba(251, 191, 36, 0.4);
     }
 
-    /* مستطيل شريط التحكم في الخط المجسم */
+    /* مستطيل شريط الخط السلس */
     .font-control-box {
-      background: linear-gradient(135deg, rgba(30, 8, 56, 0.96), rgba(12, 3, 26, 0.98));
+      background: linear-gradient(135deg, rgba(28, 8, 52, 0.95), rgba(12, 3, 26, 0.98));
       border: 1.8px solid #f59e0b;
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 158, 11, 0.25), inset 0 1px 2px rgba(255,255,255,0.25);
+      box-shadow: 0 8px 25px -4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(245, 158, 11, 0.22);
     }
 
-    /* الكرة ثلاثية الأبعاد على الشريط المنزلق */
+    /* الشريط المنزلق فائق السلاسة والخفة للموبايل والكمبيوتر */
+    .smooth-range-track {
+      position: relative;
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #059669 0%, #10b981 40%, #f59e0b 75%, #fbbf24 100%);
+      border: 1.5px solid #fde047;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
     .font-range-input {
       -webkit-appearance: none;
       appearance: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       background: transparent;
-      height: 28px;
+      margin: 0;
+      cursor: pointer;
+      touch-action: pan-x;
     }
-    .font-range-input:focus {
-      outline: none;
-    }
+    .font-range-input:focus { outline: none; }
+    
     .font-range-input::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #ffffff 8%, #fde047 30%, #d97706 75%, #78350f 100%);
+      background: radial-gradient(circle at 35% 30%, #ffffff 10%, #fde047 35%, #d97706 80%, #78350f 100%);
       border: 2px solid #ffffff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.95), 0 0 14px rgba(251,191,36,0.95);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.9);
       cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-    .font-range-input::-webkit-slider-thumb:hover {
-      transform: scale(1.15);
+      transform: translateZ(0);
     }
     .font-range-input::-moz-range-thumb {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #ffffff 8%, #fde047 30%, #d97706 75%, #78350f 100%);
+      background: radial-gradient(circle at 35% 30%, #ffffff 10%, #fde047 35%, #d97706 80%, #78350f 100%);
       border: 2px solid #ffffff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.95), 0 0 14px rgba(251,191,36,0.95);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.9), 0 0 12px rgba(251,191,36,0.9);
       cursor: pointer;
     }
 
-    .hadith-card {
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: pan-y;
-    }
-
-    /* ستارة القائمة المنسدلة */
     .dropdown-curtain {
       background-color: #15062c;
       background-image: 
         linear-gradient(180deg, rgba(32, 9, 65, 0.96), rgba(16, 4, 34, 0.98)),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 0 L25 15 L40 20 L25 25 L20 40 L15 25 L0 20 L15 15 Z' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.18'/%3E%3C/svg%3E");
     }
+
+    /* الأنماط الخمسة لخلفيات الأحاديث */
+    .card-theme-purple {
+      background: linear-gradient(135deg, rgba(28, 8, 52, 0.92), rgba(16, 4, 32, 0.95));
+      border: 1.5px solid rgba(168, 85, 247, 0.45);
+    }
+    .card-theme-purple:hover { border-color: rgba(192, 132, 252, 0.8); }
+
+    .card-theme-burgundy {
+      background: linear-gradient(135deg, rgba(46, 8, 18, 0.92), rgba(26, 4, 10, 0.95));
+      border: 1.5px solid rgba(244, 63, 94, 0.45);
+    }
+    .card-theme-burgundy:hover { border-color: rgba(251, 113, 133, 0.8); }
+
+    .card-theme-blue {
+      background: linear-gradient(135deg, rgba(6, 26, 56, 0.92), rgba(3, 14, 34, 0.95));
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+    }
+    .card-theme-blue:hover { border-color: rgba(125, 211, 252, 0.8); }
+
+    .card-theme-brown {
+      background: linear-gradient(135deg, rgba(42, 20, 8, 0.92), rgba(24, 10, 4, 0.95));
+      border: 1.5px solid rgba(245, 158, 11, 0.45);
+    }
+    .card-theme-brown:hover { border-color: rgba(251, 191, 36, 0.8); }
+
+    .card-theme-green {
+      background: linear-gradient(135deg, rgba(6, 40, 24, 0.92), rgba(3, 24, 14, 0.95));
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+    }
+    .card-theme-green:hover { border-color: rgba(52, 211, 153, 0.8); }
   </style>
 </head>
 <body class="text-purple-100 min-h-screen relative">
@@ -149,47 +173,38 @@
     </div>
   </div>
 
-  <!-- مستطيل مجسم للتحكم في حجم الخط أسفل اليافطة -->
+  <!-- مستطيل مجسم للتحكم في حجم الخط (سلس وخفيف وأيقونة SVG واضحة للموبايل) -->
   <div class="max-w-xl mx-auto px-4 mt-3">
     <div class="font-control-box p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3.5 backdrop-blur-md">
-      <!-- تسمية حجم الخط مع أيقونة -->
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <span class="text-amber-300 text-xl drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]">🗚</span>
+      <!-- أيقونة حجم الخط SVG عالية الدقة -->
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <svg class="w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.85)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19V7a3 3 0 0 1 6 0v12M4 13h6"/>
+          <path d="M15 19v-6a2.5 2.5 0 0 1 5 0v6M15 15h5"/>
+        </svg>
         <span class="font-black text-amber-200 text-sm sm:text-base tracking-wide drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]">
           حجم الخط
         </span>
       </div>
 
-      <!-- شريط التمرير المثلثي والكرة الذهبية المجسمة -->
+      <!-- الشريط المنزلق السلس مع الكرة الذهبية 3D -->
       <div class="relative w-full max-w-xs flex items-center">
-        <!-- رسم الشريط المنزلق على شكل مثلث متسع من اليسار إلى اليمين -->
-        <svg class="absolute inset-0 w-full h-5 pointer-events-none my-auto" viewBox="0 0 200 20" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="wedgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#059669" stop-opacity="0.6"/>
-              <stop offset="50%" stop-color="#10b981" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.95"/>
-            </linearGradient>
-          </defs>
-          <polygon points="4,10 196,2 196,18 4,10" fill="url(#wedgeGrad)" stroke="#fcd34d" stroke-width="1.3"/>
-        </svg>
-        <input type="range" id="fontSizeSlider" min="1" max="1.6" step="0.02" value="1" dir="ltr" class="font-range-input relative z-10 w-full cursor-pointer">
+        <div class="smooth-range-track"></div>
+        <input type="range" id="fontSizeSlider" min="1" max="1.55" step="0.01" value="1" dir="ltr" class="font-range-input">
       </div>
 
-      <!-- مؤشر النسبة المئوية للتكبير -->
-      <span id="fontSizeDisplay" class="text-xs sm:text-sm font-black text-amber-300 font-mono px-3 py-1 rounded-xl bg-purple-950/80 border border-amber-400/40 shadow-inner">
+      <span id="fontSizeDisplay" class="text-xs sm:text-sm font-black text-amber-300 font-mono px-3 py-1 rounded-xl bg-purple-950/90 border border-amber-400/40 shadow-inner">
         100%
       </span>
     </div>
   </div>
 
-  <!-- شريط العنوان والفلترة: توسيط موسوعة الصحيحين وأيقونة الكتاب 3D في منتصف الصفحة تماماً -->
+  <!-- شريط العنوان والفلترة في منتصف الصفحة -->
   <header class="border-b border-purple-900/60 bg-[#120524]/90 backdrop-blur sticky top-0 z-40 py-4 px-6 shadow-md shadow-purple-950/40 mt-4">
     <div class="max-w-5xl mx-auto flex flex-col items-center justify-center text-center gap-3">
       
-      <!-- أيقونة الكتاب ثلاثية الأبعاد الملونة وعنوان موسوعة الصحيحين في المنتصف -->
+      <!-- كتاب 3D مجسم وموسوعة الصحيحين في المنتصف -->
       <div class="flex items-center justify-center gap-3 sm:gap-4">
-        <!-- كتاب 3D مجسم فاخر بتجليد زمردي وصفحات ذهبية -->
         <svg class="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-[0_4px_14px_rgba(251,191,36,0.65)]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="bookCoverLeft" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -223,7 +238,7 @@
         </h1>
       </div>
 
-      <!-- سطر البحث الفوري أسمك وأوضح وبارز في المنتصف -->
+      <!-- سطر البحث الفوري أسمك وأوضح -->
       <p class="text-sm sm:text-base md:text-lg font-black text-purple-200 tracking-wide drop-shadow-md">
         البحث الفوري في أحاديث صحيح الإمام البخاري وصحيح الإمام مسلم
       </p>
@@ -307,7 +322,7 @@
       <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
-    <!-- قائمة النتائج مع الترقيم في أعلى المستطيل في المنتصف -->
+    <!-- قائمة النتائج مع التناوب الدقيق للألوان الخمسة -->
     <div id="resultsContainer" class="space-y-6"></div>
 
     <!-- مؤشر التحميل الدائري اللانهائي -->
@@ -317,7 +332,7 @@
     </div>
   </main>
 
-  <!-- زر عائم للصعود للأعلى فقط -->
+  <!-- زر عائم للصعود للأعلى -->
   <button id="backToTopBtn" 
           title="الصعود إلى أعلى الصفحة"
           class="fixed bottom-6 left-6 z-50 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-200 text-slate-950 font-black px-4 py-3 rounded-2xl shadow-[0_4px_22px_rgba(253,224,71,0.65)] border border-amber-100 active:scale-95 cursor-pointer">
@@ -335,19 +350,31 @@
     let isLoadingMore = false;
     let selectedBookFilter = "all";
 
-    // التحكم في حجم الخط عبر الشريط المنزلق
+    // مصفوفة تعاقب الألوان الخمسة الفاخرة بنفس الترتيب المطلوب تماماً
+    const colorThemes = [
+      "card-theme-purple",   // 1. بنفسجي غامق
+      "card-theme-burgundy", // 2. أحمر غامق / بني محمر
+      "card-theme-blue",     // 3. أزرق غامق
+      "card-theme-brown",    // 4. بني غامق
+      "card-theme-green"     // 5. أخضر غامق
+    ];
+
+    // سلاسة شريط التحكم في حجم الخط باستخدام requestAnimationFrame
     const fontSizeSlider = document.getElementById("fontSizeSlider");
     const fontSizeDisplay = document.getElementById("fontSizeDisplay");
+    let fontRAF = null;
 
     fontSizeSlider.addEventListener("input", (e) => {
       const scale = parseFloat(e.target.value);
-      document.documentElement.style.setProperty("--font-scale", scale);
       if (fontSizeDisplay) {
         fontSizeDisplay.innerText = `${Math.round(scale * 100)}%`;
       }
+      if (fontRAF) cancelAnimationFrame(fontRAF);
+      fontRAF = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty("--font-scale", scale);
+      });
     });
 
-    // تنظيف الرموز التالفة
     function cleanCorruptedChars(text) {
       if (!text) return "";
       return text
@@ -355,7 +382,6 @@
         .replace(/[\u0000-\u001F\u007F-\u009F]/g, "");
     }
 
-    // تطبيع نصوص البحث
     function normalizeArabic(text) {
       if (!text) return "";
       return cleanCorruptedChars(text)
@@ -366,9 +392,8 @@
         .trim();
     }
 
-    // نسخ الحديث
     function copyHadithText(h, cardElement) {
-      const fullText = `${h.text}\n\n[${h.book} - رقم الحديث: ${h.number}]`;
+      const fullText = `${h.text}\n\n[${h.book} - رقم ح : ${h.number}]`;
 
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(fullText).catch(() => fallbackCopy(fullText));
@@ -400,9 +425,9 @@
       if (oldModal) oldModal.remove();
 
       const modal = document.createElement("div");
-      modal.className = "copy-modal-overlay absolute inset-0 z-30 flex items-center justify-center bg-sky-950/75 backdrop-blur-sm rounded-2xl transition-all duration-300 opacity-0 pointer-events-none";
+      modal.className = "copy-modal-overlay absolute inset-0 z-30 flex items-center justify-center bg-sky-950/80 backdrop-blur-sm rounded-2xl transition-all duration-300 opacity-0 pointer-events-none";
       modal.innerHTML = `
-        <div class="px-6 py-4 bg-sky-900/90 border-2 border-sky-400/80 rounded-2xl shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center gap-3 transform scale-90 transition-transform duration-300">
+        <div class="px-6 py-4 bg-sky-900/95 border-2 border-sky-400 rounded-2xl shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center gap-3 transform scale-90 transition-transform duration-300">
           <svg class="w-7 h-7 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
           </svg>
@@ -507,19 +532,20 @@
 
         nextItems.forEach((h, idx) => {
           const serialNum = displayedCount + idx + 1;
+          // التبديل الدوري للألوان الخمسة (0, 1, 2, 3, 4)
+          const themeClass = colorThemes[(serialNum - 1) % 5];
 
           const card = document.createElement("div");
-          card.className = "hadith-card relative w-full p-6 sm:p-7 bg-[#16072b]/80 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-xl cursor-pointer group";
+          card.className = `relative w-full p-6 sm:p-7 ${themeClass} rounded-2xl transition-all duration-200 shadow-xl`;
 
           card.innerHTML = `
-            <!-- الشريط العلوي للبطاقة: اسم الكتاب، رقم المستطيل في المنتصف، ورقم الحديث على اليسار -->
-            <div class="flex items-center justify-between mb-4 border-b border-purple-800/50 pb-3 gap-2">
-              <!-- اسم الكتاب على اليمين -->
+            <!-- الشريط العلوي للبطاقة: اسم الكتاب، رقم المستطيل في النص، واختصار رقم ح : X على اليسار -->
+            <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3 gap-2">
               <span class="hadith-book-tag font-black px-3.5 py-1.5 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">
                 ${h.book}
               </span>
               
-              <!-- رقم المستطيل التسلسلي في أعلى المستطيل في النص -->
+              <!-- رقم المستطيل في أعلى المستطيل في المنتصف -->
               <div class="badge-center-counter px-4 py-1 rounded-xl flex items-center justify-center gap-1.5 bg-gradient-to-b from-[#064e3b] to-[#022013] border-2 border-emerald-400 shadow-[0_3px_12px_rgba(2,44,25,0.85)]">
                 <span class="text-emerald-300 text-xs font-bold">#</span>
                 <span class="text-amber-300 font-black font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
@@ -527,20 +553,39 @@
                 </span>
               </div>
 
-              <!-- رقم الحديث على اليسار -->
-              <span class="hadith-num-tag font-black text-amber-300 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1.5 rounded-xl shadow-sm tracking-wide">
-                رقم الحديث: <span class="text-white font-black">${h.number}</span>
+              <!-- اختصار: رقم ح : X بخط واضح وأسمك -->
+              <span class="hadith-num-tag font-black text-amber-300 bg-amber-400/10 border border-amber-400/35 px-3.5 py-1.5 rounded-xl shadow-sm tracking-wide">
+                رقم ح : <span class="text-white font-black">${h.number}</span>
               </span>
             </div>
 
             <!-- نص الحديث المشكول -->
             <p class="hadith-font text-purple-50 tracking-wide">${h.text}</p>
+
+            <!-- زر نسخ الحديث في أسفل كل حديث -->
+            <div class="mt-5 pt-3.5 border-t border-white/10 flex justify-end">
+              <button type="button" class="copy-action-btn flex items-center gap-2 bg-[#120524]/90 hover:bg-amber-400 hover:text-slate-950 text-amber-300 font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-amber-400/60 shadow-md transition-all active:scale-95 cursor-pointer">
+                <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                <span>نسخ الحديث</span>
+              </button>
+            </div>
           `;
 
+          // نسخ بالضغط على الزر المخصص
+          const copyBtn = card.querySelector(".copy-action-btn");
+          copyBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            copyHadithText(h, card);
+          });
+
+          // نسخ إضافي بالضغط المطول لمدة ثانيتين
           let pressTimer = null;
           let isPressing = false;
 
           function startPress(e) {
+            if (e.target.closest("button")) return;
             if (e.type === "mousedown" && e.button !== 0) return;
             isPressing = true;
             pressTimer = setTimeout(() => {
@@ -576,7 +621,7 @@
         displayedCount += nextItems.length;
         loader.classList.add("hidden");
         isLoadingMore = false;
-      }, 250);
+      }, 200);
     }
 
     // إدارة الزر العائم والتمرير
