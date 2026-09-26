@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=El+Messiri:wght@600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=El+Messiri:wght@600;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { 
       font-family: 'Tajawal', sans-serif; 
@@ -21,46 +21,59 @@
       letter-spacing: 1px;
       text-shadow: 0 0 20px rgba(56, 189, 248, 0.6), 0 3px 6px rgba(0,0,0,0.9);
     }
-    /* يافطة بنقوش وزخارف إسلامية ذهبية لامعة ومتوهجة */
+    
+    /* يافطة بنقوش وزخارف إسلامية ذهبية لامعة */
     .islamic-banner {
-      background-color: #120324;
+      background-color: #0e021d;
       background-image: 
-        radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.22) 0%, transparent 75%),
-        linear-gradient(135deg, rgba(28, 8, 52, 0.88), rgba(12, 3, 25, 0.92)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 0 L52 28 L80 40 L52 52 L40 80 L28 52 L0 40 L28 28 Z' stroke='%23f59e0b' stroke-width='1.5' stroke-opacity='0.75'/%3E%3Crect x='20' y='20' width='40' height='40' stroke='%23fbbf24' stroke-width='1.2' stroke-opacity='0.55' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23fef08a' stroke-width='1.1' stroke-opacity='0.8'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23fbbf24' fill-opacity='0.3' stroke='%23f59e0b' stroke-width='1.2' stroke-opacity='0.9'/%3E%3Cpath d='M40 8 L44 32 L68 40 L44 48 L40 72 L36 48 L12 40 L36 32 Z' stroke='%23fde047' stroke-width='1' stroke-opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
-      border: 1.5px solid rgba(245, 158, 11, 0.65);
-      box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.95), 0 0 35px 4px rgba(245, 158, 11, 0.28), inset 0 0 25px rgba(245, 158, 11, 0.15);
+        radial-gradient(ellipse at 50% 30%, rgba(255, 234, 128, 0.35) 0%, rgba(245, 158, 11, 0.18) 50%, transparent 75%),
+        linear-gradient(135deg, rgba(22, 6, 42, 0.88), rgba(9, 2, 20, 0.94)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 0 L52 28 L80 40 L52 52 L40 80 L28 52 L0 40 L28 28 Z' stroke='%23FFF275' stroke-width='1.8' stroke-opacity='0.95'/%3E%3Crect x='20' y='20' width='40' height='40' stroke='%23FFD700' stroke-width='1.4' stroke-opacity='0.85' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='18' stroke='%23FFFFFF' stroke-width='1.2' stroke-opacity='0.9'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23FFE57F' fill-opacity='0.55' stroke='%23FFF5A5' stroke-width='1.6' stroke-opacity='1'/%3E%3Cpath d='M40 6 L44 32 L70 40 L44 48 L40 74 L36 48 L10 40 L36 32 Z' stroke='%23FFFDE7' stroke-width='1.4' stroke-opacity='0.95'/%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='70' cy='10' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='10' cy='70' r='1.5' fill='%23FFFFFF'/%3E%3Ccircle cx='70' cy='70' r='1.5' fill='%23FFFFFF'/%3E%3C/g%3E%3C/svg%3E");
+      border: 1.8px solid #FCD34D;
+      box-shadow: 
+        0 15px 45px -5px rgba(0, 0, 0, 0.95), 
+        0 0 45px 6px rgba(251, 191, 36, 0.45), 
+        0 0 15px 2px rgba(255, 255, 255, 0.35),
+        inset 0 0 35px rgba(251, 191, 36, 0.25);
     }
+    
     .badge-counter {
       background: radial-gradient(circle at 30% 30%, #064e3b, #022013);
       border: 1.5px solid #10b981;
       box-shadow: 0 4px 15px rgba(2, 44, 25, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.2);
     }
+
+    /* تأثير تفاعلي خفيف لبطاقة الحديث */
+    .hadith-card {
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+    }
   </style>
 </head>
 <body class="text-purple-100 min-h-screen relative">
 
-  <!-- اليافطة العلوية المزخرفة بالنقوش الذهبية اللامعة -->
+  <!-- اليافطة العلوية المزخرفة بالذهب المتوهج اللامع -->
   <div class="pt-6 pb-2 px-4">
     <div class="max-w-2xl mx-auto islamic-banner relative rounded-3xl px-8 py-7 text-center backdrop-blur-md overflow-hidden">
-      <!-- زخارف الأركان التراثية المذهبة -->
-      <div class="absolute top-2.5 right-3 text-amber-300 text-sm drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]">❖</div>
-      <div class="absolute top-2.5 left-3 text-amber-300 text-sm drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]">❖</div>
-      <div class="absolute bottom-2.5 right-3 text-amber-300 text-sm drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]">❖</div>
-      <div class="absolute bottom-2.5 left-3 text-amber-300 text-sm drop-shadow-[0_0_8px_rgba(251,191,36,0.9)]">❖</div>
+      <!-- زخارف الأركان الذهبية -->
+      <div class="absolute top-2.5 right-3 text-amber-200 text-base drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
+      <div class="absolute top-2.5 left-3 text-amber-200 text-base drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
+      <div class="absolute bottom-2.5 right-3 text-amber-200 text-base drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
+      <div class="absolute bottom-2.5 left-3 text-amber-200 text-base drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]">❖</div>
 
-      <!-- اسم الشيخ بالخط التراثي الفخم -->
+      <!-- اسم الشيخ -->
       <div class="flex items-center justify-center gap-3">
-        <span class="text-amber-400 text-lg drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]">✦</span>
+        <span class="text-amber-200 text-xl drop-shadow-[0_0_10px_rgba(254,240,138,1)]">✦</span>
         <h2 class="title-font text-2xl sm:text-3xl md:text-4xl font-bold text-sky-400">
           الشيخ / كرم عثمان
         </h2>
-        <span class="text-amber-400 text-lg drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]">✦</span>
+        <span class="text-amber-200 text-xl drop-shadow-[0_0_10px_rgba(254,240,138,1)]">✦</span>
       </div>
 
-      <!-- الوصف باللون الأزرق الفاتح منسق ونازل للأسفل -->
+      <!-- الوصف باللون الأزرق الفاتح -->
       <div class="mt-4">
-        <span class="text-xs sm:text-sm text-sky-200 font-bold tracking-widest bg-[#15072b]/85 px-6 py-1.5 rounded-full border border-sky-400/40 shadow-inner">
+        <span class="text-xs sm:text-sm text-sky-200 font-bold tracking-widest bg-[#15072b]/90 px-6 py-1.5 rounded-full border border-sky-400/40 shadow-inner">
           محرك بحث أحاديث الصحيحين
         </span>
       </div>
@@ -71,7 +84,7 @@
   <header class="border-b border-purple-900/60 bg-[#120524]/85 backdrop-blur sticky top-0 z-40 py-3.5 px-6 shadow-md shadow-purple-950/40 mt-3">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div>
-        <h1 class="text-xl font-bold text-amber-400 flex items-center gap-2">
+        <h1 class="text-xl font-bold text-amber-300 flex items-center gap-2">
           <span>📖</span>
           <span>موسوعة الصحيحين</span>
         </h1>
@@ -89,43 +102,55 @@
   </header>
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
-    <!-- صندوق البحث -->
-    <div class="relative mb-8" id="searchSection">
-      <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none">
-        <svg class="w-6 h-6 text-emerald-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"></path>
-        </svg>
+    <!-- صندوق البحث الموسع لأسفل مع جملة الإجمالي المستقلة -->
+    <div class="mb-8" id="searchSection">
+      <div class="relative">
+        <div class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
+          <svg class="w-7 h-7 text-emerald-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"></path>
+          </svg>
+        </div>
+        <input type="text" id="searchInput" 
+               placeholder="ابحث عن كلمة، راوٍ، أو مسألة فقهية (مثال: إنما الأعمال بالنيات)..." 
+               class="w-full bg-[#062c1d] border-2 border-emerald-600/70 rounded-2xl pr-16 pl-6 py-5 sm:py-6 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 text-white placeholder-emerald-200/60 shadow-2xl transition">
       </div>
-      <input type="text" id="searchInput" 
-             placeholder="ابحث عن كلمة، راوٍ، أو مسألة فقهية (مثال: إنما الأعمال بالنيات)..." 
-             class="w-full bg-[#062c1d] border-2 border-emerald-600/70 rounded-2xl pr-14 pl-5 py-4 text-base focus:outline-none focus:ring-2 focus:ring-emerald-400 text-white placeholder-emerald-200/60 shadow-xl transition">
-      <span id="resultCount" class="absolute left-4 top-4 text-xs bg-[#021d12] text-emerald-300 border border-emerald-700/60 px-3 py-1.5 rounded-full font-medium shadow-inner">جاهز للبحث</span>
+
+      <!-- سطر سفلي مستقل لجملة الإجمالي -->
+      <div class="mt-4 flex items-center justify-center">
+        <div class="inline-flex items-center gap-2 bg-[#062c1d] border-2 border-emerald-500/70 px-6 py-2.5 rounded-2xl shadow-lg">
+          <span class="text-emerald-400 text-sm">❖</span>
+          <span id="resultCount" class="text-sm sm:text-base font-black text-amber-300 tracking-wide drop-shadow-[0_0_8px_rgba(252,211,77,0.7)]">
+            جاري التجهيز...
+          </span>
+          <span class="text-emerald-400 text-sm">❖</span>
+        </div>
+      </div>
     </div>
 
     <!-- مؤشر التحميل الأولي -->
     <div id="loader" class="text-center py-20">
-      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-400 border-t-transparent mb-3 shadow-[0_0_15px_rgba(251,191,36,0.4)]"></div>
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-300 border-t-transparent mb-3 shadow-[0_0_15px_rgba(253,224,71,0.5)]"></div>
       <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
-    <!-- قائمة النتائج مع الترقيم الخارجي -->
+    <!-- قائمة النتائج -->
     <div id="resultsContainer" class="space-y-5"></div>
 
     <!-- مؤشر التحميل الدائري اللانهائي -->
     <div id="infiniteLoader" class="text-center py-8 hidden">
-      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-400 border-t-transparent shadow-[0_0_15px_rgba(251,191,36,0.5)]"></div>
-      <p class="text-amber-300 text-xs mt-2 font-medium">جاري تحميل المزيد من الأحاديث...</p>
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-300 border-t-transparent shadow-[0_0_15px_rgba(253,224,71,0.6)]"></div>
+      <p class="text-amber-200 text-xs mt-2 font-medium">جاري تحميل المزيد من الأحاديث...</p>
     </div>
   </main>
 
-  <!-- زر عائم دائماً للصعود السريع لشريط البحث -->
+  <!-- زر عائم للصعود للأعلى فقط -->
   <button id="backToTopBtn" 
-          title="الصعود إلى شريط البحث"
-          class="fixed bottom-6 left-6 z-50 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-[0_4px_22px_rgba(245,158,11,0.55)] border border-amber-200 active:scale-95 cursor-pointer">
-    <svg class="w-5 h-5 stroke-[2.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          title="الصعود إلى أعلى الصفحة"
+          class="fixed bottom-6 left-6 z-50 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-200 text-slate-950 font-black px-4 py-3 rounded-2xl shadow-[0_4px_22px_rgba(253,224,71,0.65)] border border-amber-100 active:scale-95 cursor-pointer">
+    <svg class="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
-    <span class="text-xs sm:text-sm font-black">إلى البحث</span>
+    <span class="text-xs sm:text-sm font-black">للأعلى</span>
   </button>
 
   <script>
@@ -152,6 +177,75 @@
         .replace(/ى/g, "ي")
         .replace(/ة/g, "ه")
         .trim();
+    }
+
+    // نسخ النص وإظهار نافذة التأكيد
+    function copyHadithText(h, cardElement) {
+      const fullText = `${h.text}\n\n[${h.book} - رقم الحديث: ${h.number}]`;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(fullText).catch(() => fallbackCopy(fullText));
+      } else {
+        fallbackCopy(fullText);
+      }
+
+      // اهتزاز خفيف للموبايل
+      if (navigator.vibrate) {
+        try { navigator.vibrate(50); } catch(e){}
+      }
+
+      showCopyModal(cardElement);
+    }
+
+    // نسخ احتياطي للأجهزة القديمة
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try { document.execCommand('copy'); } catch(e){}
+      document.body.removeChild(textArea);
+    }
+
+    // إظهار النافذة الزرقاء الشفافة في منتصف المربع ثم إخفاؤها بعد ثانية
+    function showCopyModal(card) {
+      const oldModal = card.querySelector(".copy-modal-overlay");
+      if (oldModal) oldModal.remove();
+
+      const modal = document.createElement("div");
+      modal.className = "copy-modal-overlay absolute inset-0 z-30 flex items-center justify-center bg-sky-950/75 backdrop-blur-sm rounded-2xl transition-all duration-300 opacity-0 pointer-events-none";
+      modal.innerHTML = `
+        <div class="px-6 py-4 bg-sky-900/90 border-2 border-sky-400/80 rounded-2xl shadow-[0_0_35px_rgba(56,189,248,0.7)] flex items-center gap-3 transform scale-90 transition-transform duration-300">
+          <svg class="w-7 h-7 text-amber-300 drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="text-amber-300 font-black text-base sm:text-lg tracking-wide drop-shadow-[0_0_10px_rgba(252,211,77,0.9)]">
+            تم نسخ الحديث الشريف
+          </span>
+        </div>
+      `;
+
+      card.appendChild(modal);
+
+      requestAnimationFrame(() => {
+        modal.classList.remove("opacity-0");
+        modal.classList.add("opacity-100");
+        const inner = modal.firstElementChild;
+        if (inner) {
+          inner.classList.remove("scale-90");
+          inner.classList.add("scale-100");
+        }
+      });
+
+      // تختفي بعد ثانية واحدة (1000 ميلي ثانية)
+      setTimeout(() => {
+        modal.classList.remove("opacity-100");
+        modal.classList.add("opacity-0");
+        setTimeout(() => modal.remove(), 300);
+      }, 1000);
     }
 
     async function loadHadithData() {
@@ -188,7 +282,7 @@
 
         allHadiths = [...bukhariFormatted, ...muslimFormatted];
         document.getElementById("loader").classList.add("hidden");
-        document.getElementById("resultCount").innerText = `إجمالي: ${allHadiths.length} حديث`;
+        document.getElementById("resultCount").innerText = `إجمالي: ${allHadiths.length.toLocaleString('ar-EG')} حديث متوفر للبحث`;
         filteredHadiths = allHadiths;
         renderNextBatch();
       } catch (err) {
@@ -208,10 +302,10 @@
 
       displayedCount = 0;
       document.getElementById("resultsContainer").innerHTML = "";
-      document.getElementById("resultCount").innerText = `${filteredHadiths.length} نتيجة`;
+      document.getElementById("resultCount").innerText = `نتائج البحث: ${filteredHadiths.length.toLocaleString('ar-EG')} حديث`;
 
       if (filteredHadiths.length === 0) {
-        document.getElementById("resultsContainer").innerHTML = `<div class="text-center py-16 text-purple-400">لا توجد نتائج مطابقة لما بحثت عنه.</div>`;
+        document.getElementById("resultsContainer").innerHTML = `<div class="text-center py-16 text-purple-400 font-bold text-lg">لا توجد نتائج مطابقة لما بحثت عنه.</div>`;
         return;
       }
 
@@ -236,22 +330,68 @@
           row.className = "flex items-center gap-3 sm:gap-4 group";
 
           row.innerHTML = `
-            <div class="flex-shrink-0 w-11 h-11 sm:w-13 sm:h-13 badge-counter rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105">
-              <span class="text-amber-300 font-extrabold text-base sm:text-lg font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
+            <!-- الترقيم التسلسلي الخارجي على اليمين -->
+            <div class="flex-shrink-0 w-11 h-11 sm:w-14 sm:h-14 badge-counter rounded-2xl flex items-center justify-center transition-transform group-hover:scale-105">
+              <span class="text-amber-300 font-black text-base sm:text-xl font-mono drop-shadow-[0_0_8px_rgba(252,211,77,0.9)]">
                 ${serialNum}
               </span>
             </div>
 
-            <div class="flex-grow p-6 bg-[#16072b]/80 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-lg">
-              <div class="flex items-center justify-between mb-3 border-b border-purple-800/50 pb-2.5">
-                <span class="text-xs font-bold px-3 py-1 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'}">
+            <!-- بطاقة الحديث (قابلة للنسخ بالضغط المطول لمدة ثانيتين) -->
+            <div class="hadith-card relative flex-grow p-6 sm:p-7 bg-[#16072b]/80 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-xl cursor-pointer">
+              <!-- الشريط العلوي للبطاقة -->
+              <div class="flex items-center justify-between mb-4 border-b border-purple-800/50 pb-3">
+                <span class="text-xs sm:text-sm font-black px-3.5 py-1.5 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">
                   ${h.book}
                 </span>
-                <span class="text-xs text-purple-400 font-mono">رقم الحديث: ${h.number}</span>
+                
+                <span class="text-xs sm:text-sm font-black text-amber-300 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1 rounded-xl shadow-sm tracking-wide">
+                  رقم الحديث: <span class="text-white font-black text-sm sm:text-base">${h.number}</span>
+                </span>
               </div>
-              <p class="hadith-font text-xl leading-loose text-purple-50 tracking-wide">${h.text}</p>
+              <p class="hadith-font text-xl sm:text-2xl leading-loose text-purple-50 tracking-wide">${h.text}</p>
             </div>
           `;
+
+          const card = row.querySelector(".hadith-card");
+
+          // مؤقت الضغط لمدة ثانيتين
+          let pressTimer = null;
+          let isPressing = false;
+
+          function startPress(e) {
+            if (e.type === "mousedown" && e.button !== 0) return;
+            isPressing = true;
+            pressTimer = setTimeout(() => {
+              if (isPressing) {
+                copyHadithText(h, card);
+                isPressing = false;
+              }
+            }, 2000); // ثانيتان بالضبط
+          }
+
+          function cancelPress() {
+            isPressing = false;
+            if (pressTimer) {
+              clearTimeout(pressTimer);
+              pressTimer = null;
+            }
+          }
+
+          // أحداث الماوس
+          card.addEventListener("mousedown", startPress);
+          card.addEventListener("mouseup", cancelPress);
+          card.addEventListener("mouseleave", cancelPress);
+
+          // أحداث اللمس للموبايل
+          card.addEventListener("touchstart", startPress, { passive: true });
+          card.addEventListener("touchend", cancelPress);
+          card.addEventListener("touchmove", cancelPress);
+          card.addEventListener("touchcancel", cancelPress);
+
+          // منع فتح القائمة الافتراضية عند الضغط المطول
+          card.addEventListener("contextmenu", (e) => e.preventDefault());
+
           container.appendChild(row);
         });
 
@@ -261,10 +401,9 @@
       }, 250);
     }
 
-    // إدارة التمرير والزر العائم
+    // إدارة الزر العائم والتمرير
     const backToTopBtn = document.getElementById("backToTopBtn");
     window.addEventListener("scroll", () => {
-      // إظهار الزر العائم عند التمرير لأسفل
       if (window.scrollY > 300) {
         backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
         backToTopBtn.classList.add("opacity-100", "pointer-events-auto");
@@ -273,19 +412,13 @@
         backToTopBtn.classList.remove("opacity-100", "pointer-events-auto");
       }
 
-      // التمرير اللانهائي
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 500) {
         renderNextBatch();
       }
     });
 
-    // عند الضغط على الزر يصعد لشريط البحث فوراً ويركز المؤشر فيه
     backToTopBtn.addEventListener("click", () => {
-      const searchInput = document.getElementById("searchInput");
-      searchInput.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => {
-        searchInput.focus();
-      }, 350);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     document.getElementById("searchInput").addEventListener("input", applyFilter);
