@@ -3,36 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موسوعة الصحيحين - البخاري ومسلم</title>
+  <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- استدعاء خط الرقعة الفني المميز بجانب خطوط النسخ والأميري -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body { 
       font-family: 'Tajawal', sans-serif; 
-      background-color: #0a0314;
-      /* خلفية بنقوش إسلامية هندسية مدمجة بنعومة مع تدرج إضاءة */
+      background-color: #080210;
+      /* خلفية بنقوش إسلامية هندسية مدمجة مع إضاءة بنفسجية داكنة */
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 70%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.12'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.15'/%3E%3Cpath d='M30 11L34.5 24.5L49 30L34.5 35.5L30 49L25.5 35.5L11 30L25.5 24.5Z' fill='none' stroke='%23d97706' stroke-width='0.7' stroke-opacity='0.12'/%3E%3C/svg%3E");
+        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 65%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0L42.4 17.6L60 30L42.4 42.4L30 60L17.6 42.4L0 30L17.6 17.6Z' fill='none' stroke='%23a855f7' stroke-width='0.9' stroke-opacity='0.12'/%3E%3Ccircle cx='30' cy='30' r='11' fill='none' stroke='%23f59e0b' stroke-width='0.7' stroke-opacity='0.14'/%3E%3Cpath d='M30 11L34.5 24.5L49 30L34.5 35.5L30 49L25.5 35.5L11 30L25.5 24.5Z' fill='none' stroke='%2338bdf8' stroke-width='0.7' stroke-opacity='0.10'/%3E%3C/svg%3E");
       background-attachment: fixed;
     }
     .hadith-font { font-family: 'Amiri', serif; }
+    .calligraphy-font { 
+      font-family: 'Aref Ruqaa', serif; 
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.55), 0 2px 4px rgba(0,0,0,0.8);
+    }
+    .islamic-box {
+      background: linear-gradient(135deg, rgba(24, 7, 45, 0.95), rgba(12, 3, 24, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 10px 30px -5px rgba(2, 6, 23, 0.8), 0 0 20px 2px rgba(56, 189, 248, 0.15);
+    }
   </style>
 </head>
 <body class="text-purple-100 min-h-screen">
 
-  <header class="border-b border-purple-900/60 bg-[#120524]/85 backdrop-blur sticky top-0 z-50 py-4 px-6 shadow-md shadow-purple-950/40">
+  <!-- القسم العلوي المزخرف: اسم الشيخ في منتصف الصفحة -->
+  <div class="pt-6 pb-2 px-4">
+    <div class="max-w-xl mx-auto islamic-box relative rounded-2xl px-6 py-4 text-center backdrop-blur-md overflow-hidden">
+      <!-- زخارف الأركان التراثية -->
+      <div class="absolute top-2 right-3 text-amber-400/40 text-xs">❖</div>
+      <div class="absolute top-2 left-3 text-amber-400/40 text-xs">❖</div>
+      <div class="absolute bottom-2 right-3 text-amber-400/40 text-xs">❖</div>
+      <div class="absolute bottom-2 left-3 text-amber-400/40 text-xs">❖</div>
+
+      <div class="flex items-center justify-center gap-3">
+        <span class="text-amber-400 text-lg">❊</span>
+        <h2 class="calligraphy-font text-2xl sm:text-3xl md:text-4xl font-bold text-sky-400 tracking-wider">
+          الشيخ / كرم عثمان
+        </h2>
+        <span class="text-amber-400 text-lg">❊</span>
+      </div>
+      <p class="text-[11px] text-sky-200/70 tracking-widest mt-1">مكتبة محرك بحث أحاديث الصحيحين</p>
+    </div>
+  </div>
+
+  <!-- شريط العنوان والفلترة -->
+  <header class="border-b border-purple-900/60 bg-[#120524]/85 backdrop-blur sticky top-0 z-50 py-3.5 px-6 shadow-md shadow-purple-950/40 mt-4">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-bold text-amber-400 flex items-center gap-2">
-          <span>✨</span>
+        <h1 class="text-xl font-bold text-amber-400 flex items-center gap-2">
+          <span>📖</span>
           <span>موسوعة الصحيحين</span>
         </h1>
         <p class="text-xs text-purple-300 mt-0.5">البحث الفوري في أحاديث صحيح الإمام البخاري وصحيح الإمام مسلم</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <select id="bookFilter" class="bg-[#1c0a38] border border-purple-800/80 rounded-xl px-4 py-2 text-sm text-purple-200 focus:outline-none focus:border-amber-400 transition">
+        <select id="bookFilter" class="bg-[#1c0a38] border border-purple-800/80 rounded-xl px-4 py-2 text-sm text-purple-200 focus:outline-none focus:border-sky-400 transition">
           <option value="all">كلا الصحيحين</option>
           <option value="bukhari">صحيح البخاري فقط</option>
           <option value="muslim">صحيح مسلم فقط</option>
@@ -46,13 +77,13 @@
     <div class="relative mb-6">
       <input type="text" id="searchInput" 
              placeholder="ابحث عن كلمة، راوٍ، أو مسألة فقهية (مثال: إنما الأعمال بالنيات)..." 
-             class="w-full bg-[#180830]/90 border border-purple-700/50 rounded-2xl px-5 py-4 text-base focus:outline-none focus:ring-2 focus:ring-amber-400 text-purple-100 placeholder-purple-400 shadow-xl transition">
-      <span id="resultCount" class="absolute left-4 top-4 text-xs bg-[#290e4f] text-amber-300 border border-purple-700/50 px-3 py-1.5 rounded-full font-medium shadow-inner">جاهز للبحث</span>
+             class="w-full bg-[#180830]/90 border border-purple-700/50 rounded-2xl px-5 py-4 text-base focus:outline-none focus:ring-2 focus:ring-sky-400 text-purple-100 placeholder-purple-400 shadow-xl transition">
+      <span id="resultCount" class="absolute left-4 top-4 text-xs bg-[#290e4f] text-sky-300 border border-purple-700/50 px-3 py-1.5 rounded-full font-medium shadow-inner">جاهز للبحث</span>
     </div>
 
     <!-- مؤشر التحميل -->
     <div id="loader" class="text-center py-20">
-      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-amber-400 border-t-transparent mb-3"></div>
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-sky-400 border-t-transparent mb-3"></div>
       <p class="text-purple-300 text-sm">جاري تحميل بيانات الأحاديث وفهرستها...</p>
     </div>
 
@@ -154,7 +185,7 @@
 
       paginatedItems.forEach(h => {
         const card = document.createElement("div");
-        card.className = "p-6 bg-[#16072b]/75 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-amber-500/50 transition-all duration-200 shadow-lg";
+        card.className = "p-6 bg-[#16072b]/75 backdrop-blur-sm border border-purple-800/40 rounded-2xl hover:border-sky-400/50 transition-all duration-200 shadow-lg";
         card.innerHTML = `
           <div class="flex items-center justify-between mb-3 border-b border-purple-800/50 pb-2.5">
             <span class="text-xs font-bold px-3 py-1 rounded-full ${h.id === 'bukhari' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'}">
