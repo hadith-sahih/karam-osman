@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسوعة الصحيحين - إشراف الشيخ كرم عثمان</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- استدعاء مسبق سريع لليافطة في ذاكرة المتصفح -->
-  <link rel="preload" as="image" href="banner.webp" type="image/webp" fetchpriority="high">
+  
+  <!-- استدعاء مسبق سريع لليافطة بالاسم الدقيق banner.png.webp -->
+  <link rel="preload" as="image" href="banner.png.webp" type="image/webp" fetchpriority="high">
   
   <!-- استدعاء الخطوط -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;600;700;800&family=El+Messiri:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -142,20 +143,24 @@
 </head>
 <body class="text-purple-100 min-h-screen relative">
 
-  <!-- اليافطة العلوية مع دعم WebP فائق الخفة والسرعة -->
+  <!-- اليافطة العلوية مع دعم مباشر لملف banner.png.webp -->
   <div class="pt-6 pb-2 px-3 sm:px-6">
     <div class="max-w-4xl mx-auto rounded-3xl sm:rounded-[2rem] p-1 sm:p-1.5 banner-frame-wrapper">
       <div class="relative overflow-hidden rounded-[1.4rem] sm:rounded-[1.8rem] bg-[#07020d]">
         <picture>
+          <source srcset="banner.png.webp" type="image/webp">
           <source srcset="banner.webp" type="image/webp">
-          <img src="banner.png" 
+          <source srcset="banner.png.jpg" type="image/jpeg">
+          <source srcset="banner.png" type="image/png">
+          <img src="banner.png.webp" 
                alt="الشيخ كرم عثمان - محرك بحث أحاديث الصحيحين" 
                fetchpriority="high"
                loading="eager"
                decoding="async"
                width="1200" 
                height="450"
-               class="w-full h-auto object-cover block shadow-2xl transition-transform duration-300 hover:scale-[1.01]">
+               class="w-full h-auto object-cover block shadow-2xl transition-transform duration-300 hover:scale-[1.01]"
+               onerror="if(this.src.indexOf('banner.png') === -1) { this.src = 'banner.png'; }">
         </picture>
       </div>
     </div>
@@ -174,7 +179,7 @@
         </span>
       </div>
 
-      <!-- الشريط المثلثي المنزلق -->
+      <!-- الشريط المثلثي المنزلق السريع -->
       <div class="relative w-full max-w-xs flex items-center h-8">
         <svg class="absolute inset-0 w-full h-5 pointer-events-none my-auto" viewBox="0 0 200 20" preserveAspectRatio="none">
           <defs>
